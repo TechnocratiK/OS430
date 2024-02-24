@@ -1,0 +1,152 @@
+
+#include "common.h"
+#include "timer.h"
+#include "lcd.h"
+
+#define LCD_DL 0 //4-bit mode
+#define LCD_N  1 //2-line mode
+#define LCD_F  1 //display ON
+#define LCD_D  1 //display ON
+#define LCD_C  1 //cursor ON
+#define LCD_B  0 //cursor blink ON
+#define LCD_SH 1 //Entire Shift on
+#define LCD_ID 1 //increment ON
+
+#define LCD_E   0x40          //Enable is plugged in P6.6
+#define LCD_RS  0x20         //Register Select is plugged in P6.5
+#define LCD_RW  0x10          // Read/Write plugged in P6.4
+
+#define LCD_DB4_0   0x01      //DB4/DB0 is plugged in P6.0
+#define LCD_DB5_1   0x02     //DB5/DB1 is plugged in P6.1
+#define LCD_DB6_2   0x04      //DB6/DB2 is plugged in P6.2
+#define LCD_DB7_3   0x08      //DB7/DB3 is plugged in P6.3
+
+
+void lcd_pulse_e(void) {
+  P6OUT |= LCD_E;
+  timer_wait(2);
+  P6OUT &= ~LCD_E;
+  timer_wait(4);
+}
+
+void lcd_init(void){
+  //char status = 0x80;
+  timer_wait(2000); //After power up wait 40ms
+
+  P6DIR = 0xFF; //everybody OUT !
+  //P6SEL = 0x00; //select GPIO mode for everything
+  
+  P6OUT = 0x00;
+  
+  timer_wait(4800);
+
+
+  P6OUT = LCD_DB5_1 + LCD_DB4_0; 
+  lcd_pulse_e();
+  P6OUT = LCD_DB5_1 + LCD_DB4_0; 
+  lcd_pulse_e();
+  P6OUT = LCD_DB5_1 + LCD_DB4_0; 
+  lcd_pulse_e();
+
+
+
+  /*Function Set*/
+  P6OUT = LCD_DB5_1; 
+  lcd_pulse_e();
+
+  P6OUT = LCD_DB5_1;
+  lcd_pulse_e();
+
+  P6OUT = LCD_DB7_3*LCD_N + LCD_DB6_2*LCD_F;
+  lcd_pulse_e();
+ 
+  timer_wait(480);  //wait 600us
+  
+  /*Display ON/OFF Control*/
+  P6OUT = 0x00;
+  lcd_pulse_e();
+  P6OUT = LCD_DB7_3 + LCD_DB6_2*LCD_D + LCD_DB5_1*LCD_C + LCD_DB4_0*LCD_B;
+  lcd_pulse_e();
+
+ timer_wait(480);
+
+  /*Display Clear*/
+  P6OUT = 0x00;
+  lcd_pulse_e();
+  //timer_wait(480);  //wait 600us
+  P6OUT = LCD_DB4_0;
+  lcd_pulse_e();
+
+ timer_wait(480);
+
+  /*Entry Mode Set*/
+  P6OUT = 0x00;
+  lcd_pulse_e();
+  P6OUT = LCD_DB6_2 + LCD_DB5_1*LCD_ID + LCD_DB4_0*LCD_SH;
+  lcd_pulse_e();
+
+  timer_wait(480);//Initialization End
+
+  //P6OUT =0x00;
+  //lcd_pulse_e();
+
+  //lcd_read_status();
+  /*while(status&0x80 != 0){
+  status = lcd_read_status();
+  } */
+
+  //lcd_writebyte('A');
+  //debug_printf("im done!");
+}
+
+void lcd_writebyte(char b ){
+  char status = 0x80;
+  P6DIR = 0xFF;
+  P6OUT = 0x00;
+  P6OUT &= ~LCD_RS;
+  P6OUT &= ~LCD_RW;
+
+  P6OUT = LCD_DB7_3;
+  lcd_pulse_e();
+
+  P6OUT = 0x00;
+  lcd_pulse_e();
+
+  P6OUT |= LCD_RS;
+  P6OUT &= ~LCD_RW;
+
+  P6OUT |= (b >> 4)&0x0F; // first four bits are db7,db6,db5,db4
+  lcd_pulse_e();
+
+  P6OUT |= b & 0x0F;
+  lcd_pulse_e();
+
+
+  //while(status&0x80 != 0){
+  //status = lcd_read_status();
+  //} 
+}
+
+char lcd_read_status(void){
+  char rb = 0;
+  P6DIR = LCD_RS + LCD_RW + LCD_E; //only those three are out values, rest is IN
+  P6OUT = LCD_RW; //set read pin high
+
+  lcd_pulse_e();
+  rb += (P6IN&0x0F) << 4;
+
+  lcd_pulse_e();
+  rb += (P6IN&0x0F);
+
+  P6DIR = 0xFF; //put it back to ALL OUT
+  return rb;
+
+}
+
+void lcd_printString(char* string){
+
+  while ((*string) != '\0'){
+    lcd_writebyte(*string);
+    string++;
+  }
+}

@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 22
+/svn/!svn/ver/48/OS430
+END
+main.c
+K 25
+svn:wc:ra_dav:version-url
+V 29
+/svn/!svn/ver/48/OS430/main.c
+END
+OS430.hzp
+K 25
+svn:wc:ra_dav:version-url
+V 32
+/svn/!svn/ver/48/OS430/OS430.hzp
+END
+flags.txt
+K 25
+svn:wc:ra_dav:version-url
+V 31
+/svn/!svn/ver/5/OS430/flags.txt
+END
+config.h
+K 25
+svn:wc:ra_dav:version-url
+V 31
+/svn/!svn/ver/48/OS430/config.h
+END
+init.s43
+K 25
+svn:wc:ra_dav:version-url
+V 31
+/svn/!svn/ver/48/OS430/init.s43
+END

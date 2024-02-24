@@ -1,0 +1,567 @@
+Fitter report for microproject
+Wed Dec 01 02:41:47 2010
+Quartus II Version 10.0 Build 218 06/27/2010 SJ Full Version
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Fitter Summary
+  3. Fitter Settings
+  4. Parallel Compilation
+  5. Pin-Out File
+  6. Fitter Resource Usage Summary
+  7. Input Pins
+  8. Output Pins
+  9. All Package Pins
+ 10. I/O Standard
+ 11. Dedicated Inputs I/O
+ 12. Output Pin Default Load For Reported TCO
+ 13. Fitter Resource Utilization by Entity
+ 14. Control Signals
+ 15. Global & Other Fast Signals
+ 16. Non-Global High Fan-Out Signals
+ 17. Interconnect Usage Summary
+ 18. LAB External Interconnect
+ 19. LAB Macrocells
+ 20. Parallel Expander
+ 21. Shareable Expander
+ 22. Logic Cell Interconnection
+ 23. Fitter Device Options
+ 24. Fitter Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2010 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++-------------------------------------------------------------------+
+; Fitter Summary                                                    ;
++-----------------------+-------------------------------------------+
+; Fitter Status         ; Successful - Wed Dec 01 02:41:47 2010     ;
+; Quartus II Version    ; 10.0 Build 218 06/27/2010 SJ Full Version ;
+; Revision Name         ; microproject                              ;
+; Top-level Entity Name ; microproject                              ;
+; Family                ; MAX7000AE                                 ;
+; Device                ; EPM7128AELC84-10                          ;
+; Timing Models         ; Final                                     ;
+; Total macrocells      ; 44 / 128 ( 34 % )                         ;
+; Total pins            ; 33 / 68 ( 49 % )                          ;
++-----------------------+-------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------+
+; Fitter Settings                                                                                               ;
++----------------------------------------------------------------------------+------------------+---------------+
+; Option                                                                     ; Setting          ; Default Value ;
++----------------------------------------------------------------------------+------------------+---------------+
+; Device                                                                     ; EPM7128AELC84-10 ;               ;
+; Use smart compilation                                                      ; Off              ; Off           ;
+; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On               ; On            ;
+; Enable compact report table                                                ; Off              ; Off           ;
+; Use TimeQuest Timing Analyzer                                              ; Off              ; Off           ;
+; Optimize Timing for ECOs                                                   ; Off              ; Off           ;
+; Regenerate full fit report during ECO compiles                             ; Off              ; Off           ;
+; Optimize IOC Register Placement for Timing                                 ; Normal           ; Normal        ;
+; Limit to One Fitting Attempt                                               ; Off              ; Off           ;
+; Fitter Initial Placement Seed                                              ; 1                ; 1             ;
+; Slow Slew Rate                                                             ; Off              ; Off           ;
+; Fitter Effort                                                              ; Auto Fit         ; Auto Fit      ;
+; Force Fitter to Avoid Periphery Placement Warnings                         ; Off              ; Off           ;
++----------------------------------------------------------------------------+------------------+---------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 2           ;
+; Maximum allowed            ; 2           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 1           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     1 processor            ; 100.0%      ;
+;     2 processors           ;   0.0%      ;
++----------------------------+-------------+
+
+
++--------------+
+; Pin-Out File ;
++--------------+
+The pin-out file can be found in H:/SVN/ECSE 426/VHDL/microproject.pin.
+
+
++---------------------------------------------------------------------+
+; Fitter Resource Usage Summary                                       ;
++-----------------------------------+---------------------------------+
+; Resource                          ; Usage                           ;
++-----------------------------------+---------------------------------+
+; Logic cells                       ; 44 / 128 ( 34 % )               ;
+; Registers                         ; 21 / 128 ( 16 % )               ;
+; Number of pterms used             ; 157                             ;
+; User inserted logic elements      ; 0                               ;
+; I/O pins                          ; 33 / 68 ( 49 % )                ;
+;     -- Clock pins                 ; 1 / 2 ( 50 % )                  ;
+;     -- Dedicated input pins       ; 0 / 2 ( 0 % )                   ;
+; Global signals                    ; 1                               ;
+; Shareable expanders               ; 10 / 128 ( 8 % )                ;
+; Parallel expanders                ; 9 / 120 ( 8 % )                 ;
+; Cells using turbo bit             ; 44 / 128 ( 34 % )               ;
+; Maximum fan-out node              ; lpm_counter:count_rtl_0|dffs[5] ;
+; Maximum fan-out                   ; 23                              ;
+; Highest non-global fan-out signal ; lpm_counter:count_rtl_0|dffs[5] ;
+; Highest non-global fan-out        ; 23                              ;
+; Total fan-out                     ; 425                             ;
+; Average fan-out                   ; 4.89                            ;
++-----------------------------------+---------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Input Pins                                                                                                                                                       ;
++------------+-------+----------+-----+-----------------------+--------------------+--------+----------------+---------------+--------------+----------------------+
+; Name       ; Pin # ; I/O Bank ; LAB ; Combinational Fan-Out ; Registered Fan-Out ; Global ; Input Register ; Power Up High ; I/O Standard ; Location assigned by ;
++------------+-------+----------+-----+-----------------------+--------------------+--------+----------------+---------------+--------------+----------------------+
+; CLK        ; 28    ; --       ; 3   ; 1                     ; 0                  ; no     ; no             ; no            ; 3.3-V LVTTL  ; User                 ;
+; MOSI       ; 25    ; --       ; 3   ; 1                     ; 0                  ; no     ; no             ; no            ; 3.3-V LVTTL  ; User                 ;
+; SOMI       ; 18    ; --       ; 2   ; 1                     ; 0                  ; no     ; no             ; no            ; 3.3-V LVTTL  ; User                 ;
+; STE        ; 24    ; --       ; 3   ; 1                     ; 0                  ; no     ; no             ; no            ; 3.3-V LVTTL  ; User                 ;
+; clock      ; 83    ; --       ; --  ; 21                    ; 0                  ; yes    ; no             ; no            ; 3.3-V LVTTL  ; User                 ;
+; reset      ; 4     ; --       ; 1   ; 22                    ; 0                  ; no     ; no             ; no            ; 3.3-V LVTTL  ; User                 ;
+; userVal[0] ; 52    ; --       ; 5   ; 1                     ; 0                  ; no     ; no             ; no            ; 3.3-V LVTTL  ; User                 ;
+; userVal[1] ; 51    ; --       ; 5   ; 1                     ; 0                  ; no     ; no             ; no            ; 3.3-V LVTTL  ; User                 ;
+; userVal[2] ; 50    ; --       ; 5   ; 1                     ; 0                  ; no     ; no             ; no            ; 3.3-V LVTTL  ; User                 ;
+; userVal[3] ; 49    ; --       ; 5   ; 1                     ; 0                  ; no     ; no             ; no            ; 3.3-V LVTTL  ; User                 ;
+; userVal[4] ; 48    ; --       ; 5   ; 1                     ; 0                  ; no     ; no             ; no            ; 3.3-V LVTTL  ; User                 ;
+; userVal[5] ; 46    ; --       ; 5   ; 1                     ; 0                  ; no     ; no             ; no            ; 3.3-V LVTTL  ; User                 ;
+; userVal[6] ; 45    ; --       ; 5   ; 1                     ; 0                  ; no     ; no             ; no            ; 3.3-V LVTTL  ; User                 ;
+; userVal[7] ; 44    ; --       ; 5   ; 1                     ; 0                  ; no     ; no             ; no            ; 3.3-V LVTTL  ; User                 ;
++------------+-------+----------+-----+-----------------------+--------------------+--------+----------------+---------------+--------------+----------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Output Pins                                                                                                                                                                                                    ;
++------------+-------+----------+-----+-----------------+---------------+----------------+------------+---------------+--------------+----------------------+-------+----------------------+---------------------+
+; Name       ; Pin # ; I/O Bank ; LAB ; Output Register ; Power Up High ; Slow Slew Rate ; Open Drain ; TRI Primitive ; I/O Standard ; Location assigned by ; Load  ; Output Enable Source ; Output Enable Group ;
++------------+-------+----------+-----+-----------------+---------------+----------------+------------+---------------+--------------+----------------------+-------+----------------------+---------------------+
+; CLK_out    ; 15    ; --       ; 2   ; no              ; no            ; no             ; no         ; no            ; 3.3-V LVTTL  ; User                 ; 10 pF ; -                    ; -                   ;
+; LED[0]     ; 70    ; --       ; 7   ; no              ; no            ; no             ; no         ; no            ; 3.3-V LVTTL  ; User                 ; 10 pF ; -                    ; -                   ;
+; LED[1]     ; 69    ; --       ; 7   ; no              ; no            ; no             ; no         ; no            ; 3.3-V LVTTL  ; User                 ; 10 pF ; -                    ; -                   ;
+; LED[2]     ; 68    ; --       ; 7   ; no              ; no            ; no             ; no         ; no            ; 3.3-V LVTTL  ; User                 ; 10 pF ; -                    ; -                   ;
+; LED[3]     ; 67    ; --       ; 7   ; no              ; no            ; no             ; no         ; no            ; 3.3-V LVTTL  ; User                 ; 10 pF ; -                    ; -                   ;
+; LED[4]     ; 65    ; --       ; 7   ; no              ; no            ; no             ; no         ; no            ; 3.3-V LVTTL  ; User                 ; 10 pF ; -                    ; -                   ;
+; LED[5]     ; 64    ; --       ; 7   ; no              ; no            ; no             ; no         ; no            ; 3.3-V LVTTL  ; User                 ; 10 pF ; -                    ; -                   ;
+; LED[6]     ; 63    ; --       ; 7   ; no              ; no            ; no             ; no         ; no            ; 3.3-V LVTTL  ; User                 ; 10 pF ; -                    ; -                   ;
+; MOSI_out   ; 21    ; --       ; 2   ; no              ; no            ; no             ; no         ; no            ; 3.3-V LVTTL  ; User                 ; 10 pF ; -                    ; -                   ;
+; SOMI_out   ; 27    ; --       ; 3   ; no              ; no            ; no             ; no         ; no            ; 3.3-V LVTTL  ; User                 ; 10 pF ; -                    ; -                   ;
+; STE_out    ; 16    ; --       ; 2   ; no              ; no            ; no             ; no         ; no            ; 3.3-V LVTTL  ; User                 ; 10 pF ; -                    ; -                   ;
+; chooseLED  ; 60    ; --       ; 6   ; no              ; no            ; no             ; no         ; no            ; 3.3-V LVTTL  ; User                 ; 10 pF ; -                    ; -                   ;
+; chooseLED2 ; 61    ; --       ; 6   ; no              ; no            ; no             ; no         ; no            ; 3.3-V LVTTL  ; User                 ; 10 pF ; -                    ; -                   ;
+; clock_en   ; 73    ; --       ; 8   ; no              ; no            ; no             ; no         ; no            ; 3.3-V LVTTL  ; User                 ; 10 pF ; -                    ; -                   ;
+; dec_pt     ; 58    ; --       ; 6   ; no              ; no            ; no             ; no         ; no            ; 3.3-V LVTTL  ; User                 ; 10 pF ; -                    ; -                   ;
++------------+-------+----------+-----+-----------------+---------------+----------------+------------+---------------+--------------+----------------------+-------+----------------------+---------------------+
+
+
++-------------------------------------------------------------------------------------------------------+
+; All Package Pins                                                                                      ;
++----------+------------+----------+----------------+--------+--------------+---------+-----------------+
+; Location ; Pad Number ; I/O Bank ; Pin Name/Usage ; Dir.   ; I/O Standard ; Voltage ; User Assignment ;
++----------+------------+----------+----------------+--------+--------------+---------+-----------------+
+; 1        ; 0          ; --       ; GND+           ;        ;              ;         ;                 ;
+; 2        ; 1          ; --       ; GND+           ;        ;              ;         ;                 ;
+; 3        ; 2          ; --       ; VCCINT         ; power  ;              ; 3.3V    ;                 ;
+; 4        ; 3          ; --       ; reset          ; input  ; 3.3-V LVTTL  ;         ; Y               ;
+; 5        ; 4          ; --       ; GND*           ;        ;              ;         ;                 ;
+; 6        ; 5          ; --       ; GND*           ;        ;              ;         ;                 ;
+; 7        ; 6          ; --       ; GND            ; gnd    ;              ;         ;                 ;
+; 8        ; 7          ; --       ; GND*           ;        ;              ;         ;                 ;
+; 9        ; 8          ; --       ; GND*           ;        ;              ;         ;                 ;
+; 10       ; 9          ; --       ; GND*           ;        ;              ;         ;                 ;
+; 11       ; 10         ; --       ; GND*           ;        ;              ;         ;                 ;
+; 12       ; 11         ; --       ; GND*           ;        ;              ;         ;                 ;
+; 13       ; 12         ; --       ; VCCIO          ; power  ;              ; 3.3V    ;                 ;
+; 14       ; 13         ; --       ; TDI            ; input  ; 3.3-V LVTTL  ;         ; Y               ;
+; 15       ; 14         ; --       ; CLK_out        ; output ; 3.3-V LVTTL  ;         ; Y               ;
+; 16       ; 15         ; --       ; STE_out        ; output ; 3.3-V LVTTL  ;         ; Y               ;
+; 17       ; 16         ; --       ; GND*           ;        ;              ;         ;                 ;
+; 18       ; 17         ; --       ; SOMI           ; input  ; 3.3-V LVTTL  ;         ; Y               ;
+; 19       ; 18         ; --       ; GND            ; gnd    ;              ;         ;                 ;
+; 20       ; 19         ; --       ; GND*           ;        ;              ;         ;                 ;
+; 21       ; 20         ; --       ; MOSI_out       ; output ; 3.3-V LVTTL  ;         ; Y               ;
+; 22       ; 21         ; --       ; GND*           ;        ;              ;         ;                 ;
+; 23       ; 22         ; --       ; TMS            ; input  ; 3.3-V LVTTL  ;         ; Y               ;
+; 24       ; 23         ; --       ; STE            ; input  ; 3.3-V LVTTL  ;         ; Y               ;
+; 25       ; 24         ; --       ; MOSI           ; input  ; 3.3-V LVTTL  ;         ; Y               ;
+; 26       ; 25         ; --       ; VCCIO          ; power  ;              ; 3.3V    ;                 ;
+; 27       ; 26         ; --       ; SOMI_out       ; output ; 3.3-V LVTTL  ;         ; Y               ;
+; 28       ; 27         ; --       ; CLK            ; input  ; 3.3-V LVTTL  ;         ; Y               ;
+; 29       ; 28         ; --       ; GND*           ;        ;              ;         ;                 ;
+; 30       ; 29         ; --       ; GND*           ;        ;              ;         ;                 ;
+; 31       ; 30         ; --       ; GND*           ;        ;              ;         ;                 ;
+; 32       ; 31         ; --       ; GND            ; gnd    ;              ;         ;                 ;
+; 33       ; 32         ; --       ; GND*           ;        ;              ;         ;                 ;
+; 34       ; 33         ; --       ; GND*           ;        ;              ;         ;                 ;
+; 35       ; 34         ; --       ; GND*           ;        ;              ;         ;                 ;
+; 36       ; 35         ; --       ; GND*           ;        ;              ;         ;                 ;
+; 37       ; 36         ; --       ; GND*           ;        ;              ;         ;                 ;
+; 38       ; 37         ; --       ; VCCIO          ; power  ;              ; 3.3V    ;                 ;
+; 39       ; 38         ; --       ; GND*           ;        ;              ;         ;                 ;
+; 40       ; 39         ; --       ; GND*           ;        ;              ;         ;                 ;
+; 41       ; 40         ; --       ; GND*           ;        ;              ;         ;                 ;
+; 42       ; 41         ; --       ; GND            ; gnd    ;              ;         ;                 ;
+; 43       ; 42         ; --       ; VCCINT         ; power  ;              ; 3.3V    ;                 ;
+; 44       ; 43         ; --       ; userVal[7]     ; input  ; 3.3-V LVTTL  ;         ; Y               ;
+; 45       ; 44         ; --       ; userVal[6]     ; input  ; 3.3-V LVTTL  ;         ; Y               ;
+; 46       ; 45         ; --       ; userVal[5]     ; input  ; 3.3-V LVTTL  ;         ; Y               ;
+; 47       ; 46         ; --       ; GND            ; gnd    ;              ;         ;                 ;
+; 48       ; 47         ; --       ; userVal[4]     ; input  ; 3.3-V LVTTL  ;         ; Y               ;
+; 49       ; 48         ; --       ; userVal[3]     ; input  ; 3.3-V LVTTL  ;         ; Y               ;
+; 50       ; 49         ; --       ; userVal[2]     ; input  ; 3.3-V LVTTL  ;         ; Y               ;
+; 51       ; 50         ; --       ; userVal[1]     ; input  ; 3.3-V LVTTL  ;         ; Y               ;
+; 52       ; 51         ; --       ; userVal[0]     ; input  ; 3.3-V LVTTL  ;         ; Y               ;
+; 53       ; 52         ; --       ; VCCIO          ; power  ;              ; 3.3V    ;                 ;
+; 54       ; 53         ; --       ; GND*           ;        ;              ;         ;                 ;
+; 55       ; 54         ; --       ; GND*           ;        ;              ;         ;                 ;
+; 56       ; 55         ; --       ; GND*           ;        ;              ;         ;                 ;
+; 57       ; 56         ; --       ; GND*           ;        ;              ;         ;                 ;
+; 58       ; 57         ; --       ; dec_pt         ; output ; 3.3-V LVTTL  ;         ; Y               ;
+; 59       ; 58         ; --       ; GND            ; gnd    ;              ;         ;                 ;
+; 60       ; 59         ; --       ; chooseLED      ; output ; 3.3-V LVTTL  ;         ; Y               ;
+; 61       ; 60         ; --       ; chooseLED2     ; output ; 3.3-V LVTTL  ;         ; Y               ;
+; 62       ; 61         ; --       ; TCK            ; input  ; 3.3-V LVTTL  ;         ; Y               ;
+; 63       ; 62         ; --       ; LED[6]         ; output ; 3.3-V LVTTL  ;         ; Y               ;
+; 64       ; 63         ; --       ; LED[5]         ; output ; 3.3-V LVTTL  ;         ; Y               ;
+; 65       ; 64         ; --       ; LED[4]         ; output ; 3.3-V LVTTL  ;         ; Y               ;
+; 66       ; 65         ; --       ; VCCIO          ; power  ;              ; 3.3V    ;                 ;
+; 67       ; 66         ; --       ; LED[3]         ; output ; 3.3-V LVTTL  ;         ; Y               ;
+; 68       ; 67         ; --       ; LED[2]         ; output ; 3.3-V LVTTL  ;         ; Y               ;
+; 69       ; 68         ; --       ; LED[1]         ; output ; 3.3-V LVTTL  ;         ; Y               ;
+; 70       ; 69         ; --       ; LED[0]         ; output ; 3.3-V LVTTL  ;         ; Y               ;
+; 71       ; 70         ; --       ; TDO            ; output ; 3.3-V LVTTL  ;         ; Y               ;
+; 72       ; 71         ; --       ; GND            ; gnd    ;              ;         ;                 ;
+; 73       ; 72         ; --       ; clock_en       ; output ; 3.3-V LVTTL  ;         ; Y               ;
+; 74       ; 73         ; --       ; GND*           ;        ;              ;         ;                 ;
+; 75       ; 74         ; --       ; GND*           ;        ;              ;         ;                 ;
+; 76       ; 75         ; --       ; GND*           ;        ;              ;         ;                 ;
+; 77       ; 76         ; --       ; GND*           ;        ;              ;         ;                 ;
+; 78       ; 77         ; --       ; VCCIO          ; power  ;              ; 3.3V    ;                 ;
+; 79       ; 78         ; --       ; GND*           ;        ;              ;         ;                 ;
+; 80       ; 79         ; --       ; GND*           ;        ;              ;         ;                 ;
+; 81       ; 80         ; --       ; GND*           ;        ;              ;         ;                 ;
+; 82       ; 81         ; --       ; GND            ; gnd    ;              ;         ;                 ;
+; 83       ; 82         ; --       ; clock          ; input  ; 3.3-V LVTTL  ;         ; Y               ;
+; 84       ; 83         ; --       ; GND+           ;        ;              ;         ;                 ;
++----------+------------+----------+----------------+--------+--------------+---------+-----------------+
+Note: Pin directions (input, output or bidir) are based on device operating in user mode.
+
+
++--------------------------------------------------------------------------------------------------+
+; I/O Standard                                                                                     ;
++--------------+------------+----------------------+-------------------+-------------------+-------+
+; I/O Standard ; Input Vref ; Dedicated Input Pins ; Pins in I/O Bank1 ; Pins in I/O Bank2 ; Total ;
++--------------+------------+----------------------+-------------------+-------------------+-------+
+; 3.3-V LVTTL  ; -          ; 1                    ; 0                 ; 0                 ; 1     ;
++--------------+------------+----------------------+-------------------+-------------------+-------+
+
+
++---------------------------------------------------------------------+
+; Dedicated Inputs I/O                                                ;
++-------+-------+-------+-------+--------------+------------+---------+
+; Name  ; Pin # ; Type  ; VCCIO ; I/O Standard ; Input Vref ; Current ;
++-------+-------+-------+-------+--------------+------------+---------+
+; clock ; 83    ; Input ; --    ; 3.3-V LVTTL  ; -          ; 0 mA    ;
++-------+-------+-------+-------+--------------+------------+---------+
+
+
++-----------------------------------------------+
+; Output Pin Default Load For Reported TCO      ;
++--------------+-------+------------------------+
+; I/O Standard ; Load  ; Termination Resistance ;
++--------------+-------+------------------------+
+; 3.3-V LVTTL  ; 10 pF ; Not Available          ;
+; 3.3-V LVCMOS ; 10 pF ; Not Available          ;
+; 3.3-V PCI    ; 10 pF ; 25 Ohm (Parallel)      ;
+; 2.5 V        ; 10 pF ; Not Available          ;
++--------------+-------+------------------------+
+Note: User assignments will override these defaults. The user specified values are listed in the Output Pins and Bidir Pins tables.
+
+
++---------------------------------------------------------------------------------------------------------+
+; Fitter Resource Utilization by Entity                                                                   ;
++------------------------------+------------+------+---------------------------------------+--------------+
+; Compilation Hierarchy Node   ; Macrocells ; Pins ; Full Hierarchy Name                   ; Library Name ;
++------------------------------+------------+------+---------------------------------------+--------------+
+; |microproject                ; 44         ; 33   ; |microproject                         ; work         ;
+;    |lpm_counter:count_rtl_0| ; 17         ; 0    ; |microproject|lpm_counter:count_rtl_0 ; work         ;
++------------------------------+------------+------+---------------------------------------+--------------+
+
+
++---------------------------------------------------------------------------------------+
+; Control Signals                                                                       ;
++-------+----------+---------+-------+--------+----------------------+------------------+
+; Name  ; Location ; Fan-Out ; Usage ; Global ; Global Resource Used ; Global Line Name ;
++-------+----------+---------+-------+--------+----------------------+------------------+
+; clock ; PIN_83   ; 21      ; Clock ; yes    ; On                   ; --               ;
++-------+----------+---------+-------+--------+----------------------+------------------+
+
+
++----------------------------------------------------------------------+
+; Global & Other Fast Signals                                          ;
++-------+----------+---------+----------------------+------------------+
+; Name  ; Location ; Fan-Out ; Global Resource Used ; Global Line Name ;
++-------+----------+---------+----------------------+------------------+
+; clock ; PIN_83   ; 21      ; On                   ; --               ;
++-------+----------+---------+----------------------+------------------+
+
+
++-----------------------------------------------+
+; Non-Global High Fan-Out Signals               ;
++-------------------------------------+---------+
+; Name                                ; Fan-Out ;
++-------------------------------------+---------+
+; lpm_counter:count_rtl_0|dffs[11]    ; 23      ;
+; lpm_counter:count_rtl_0|dffs[10]    ; 23      ;
+; lpm_counter:count_rtl_0|dffs[9]     ; 23      ;
+; lpm_counter:count_rtl_0|dffs[5]     ; 23      ;
+; reset                               ; 22      ;
+; LEDswitch                           ; 22      ;
+; lpm_counter:count_rtl_0|dffs[8]     ; 22      ;
+; lpm_counter:count_rtl_0|dffs[7]     ; 22      ;
+; lpm_counter:count_rtl_0|dffs[6]     ; 21      ;
+; BCDinteger[6]                       ; 14      ;
+; lpm_counter:count_rtl_0|dffs[1]     ; 14      ;
+; lpm_counter:count_rtl_0|dffs[0]     ; 14      ;
+; BCDinteger[7]                       ; 13      ;
+; BCDinteger[5]                       ; 13      ;
+; BCDinteger[2]                       ; 13      ;
+; BCDinteger[3]                       ; 12      ;
+; lpm_counter:count_rtl_0|dffs[2]     ; 12      ;
+; BCDinteger[4]                       ; 11      ;
+; BCDinteger[1]                       ; 11      ;
+; lpm_counter:count_rtl_0|dffs[3]     ; 11      ;
+; BCDinteger[0]                       ; 10      ;
+; lpm_counter:count_rtl_0|dffs[4]     ; 10      ;
+; CLK                                 ; 1       ;
+; STE                                 ; 1       ;
+; SOMI                                ; 1       ;
+; MOSI                                ; 1       ;
+; userVal[7]                          ; 1       ;
+; userVal[6]                          ; 1       ;
+; userVal[5]                          ; 1       ;
+; userVal[4]                          ; 1       ;
+; userVal[3]                          ; 1       ;
+; userVal[2]                          ; 1       ;
+; userVal[1]                          ; 1       ;
+; userVal[0]                          ; 1       ;
+; ~VCC~1                              ; 1       ;
+; ~VCC~0                              ; 1       ;
+; Mux3~13                             ; 1       ;
+; Mux6~26                             ; 1       ;
+; Mux1~9                              ; 1       ;
+; Mux5~9                              ; 1       ;
+; lpm_counter:count_rtl_0|dffs[6]~103 ; 1       ;
+; lpm_counter:count_rtl_0|dffs[5]~98  ; 1       ;
+; lpm_counter:count_rtl_0|dffs[4]~94  ; 1       ;
+; lpm_counter:count_rtl_0|dffs[3]~91  ; 1       ;
+; lpm_counter:count_rtl_0|dffs[2]~89  ; 1       ;
+; Mux2~9                              ; 1       ;
+; Mux3~11                             ; 1       ;
+; Mux6~24                             ; 1       ;
+; Mux1~8                              ; 1       ;
+; Mux0~13                             ; 1       ;
++-------------------------------------+---------+
+
+
++------------------------------------------------+
+; Interconnect Usage Summary                     ;
++----------------------------+-------------------+
+; Interconnect Resource Type ; Usage             ;
++----------------------------+-------------------+
+; Output enables             ; 0 / 6 ( 0 % )     ;
+; PIA buffers                ; 54 / 288 ( 19 % ) ;
+; PIAs                       ; 54 / 288 ( 19 % ) ;
++----------------------------+-------------------+
+
+
++----------------------------------------------------------------------------+
+; LAB External Interconnect                                                  ;
++----------------------------------------------+-----------------------------+
+; LAB External Interconnects  (Average = 6.75) ; Number of LABs  (Total = 5) ;
++----------------------------------------------+-----------------------------+
+; 0 - 2                                        ; 4                           ;
+; 3 - 5                                        ; 1                           ;
+; 6 - 8                                        ; 0                           ;
+; 9 - 11                                       ; 1                           ;
+; 12 - 14                                      ; 1                           ;
+; 15 - 17                                      ; 0                           ;
+; 18 - 20                                      ; 0                           ;
+; 21 - 23                                      ; 0                           ;
+; 24 - 26                                      ; 0                           ;
+; 27 - 29                                      ; 1                           ;
++----------------------------------------------+-----------------------------+
+
+
++----------------------------------------------------------------------+
+; LAB Macrocells                                                       ;
++----------------------------------------+-----------------------------+
+; Number of Macrocells  (Average = 5.50) ; Number of LABs  (Total = 6) ;
++----------------------------------------+-----------------------------+
+; 0                                      ; 2                           ;
+; 1                                      ; 2                           ;
+; 2                                      ; 0                           ;
+; 3                                      ; 1                           ;
+; 4                                      ; 0                           ;
+; 5                                      ; 0                           ;
+; 6                                      ; 0                           ;
+; 7                                      ; 0                           ;
+; 8                                      ; 0                           ;
+; 9                                      ; 0                           ;
+; 10                                     ; 0                           ;
+; 11                                     ; 1                           ;
+; 12                                     ; 1                           ;
+; 13                                     ; 0                           ;
+; 14                                     ; 0                           ;
+; 15                                     ; 0                           ;
+; 16                                     ; 1                           ;
++----------------------------------------+-----------------------------+
+
+
++---------------------------------------------------------+
+; Parallel Expander                                       ;
++--------------------------+------------------------------+
+; Parallel Expander Length ; Number of Parallel Expanders ;
++--------------------------+------------------------------+
+; 0                        ; 0                            ;
+; 1                        ; 9                            ;
++--------------------------+------------------------------+
+
+
++-------------------------------------------------------------------------------+
+; Shareable Expander                                                            ;
++-------------------------------------------------+-----------------------------+
+; Number of shareable expanders  (Average = 1.25) ; Number of LABs  (Total = 1) ;
++-------------------------------------------------+-----------------------------+
+; 0                                               ; 7                           ;
+; 1                                               ; 0                           ;
+; 2                                               ; 0                           ;
+; 3                                               ; 0                           ;
+; 4                                               ; 0                           ;
+; 5                                               ; 0                           ;
+; 6                                               ; 0                           ;
+; 7                                               ; 0                           ;
+; 8                                               ; 0                           ;
+; 9                                               ; 0                           ;
+; 10                                              ; 1                           ;
++-------------------------------------------------+-----------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Logic Cell Interconnection                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ;
++-----+------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; LAB ; Logic Cell ; Input                                                                                                                                                                                                                                                                                                                                                                                                                                                           ; Output                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ;
++-----+------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+;  A  ; LC10       ; clock, lpm_counter:count_rtl_0|dffs[11], lpm_counter:count_rtl_0|dffs[10], lpm_counter:count_rtl_0|dffs[9], lpm_counter:count_rtl_0|dffs[8], lpm_counter:count_rtl_0|dffs[7], lpm_counter:count_rtl_0|dffs[6], lpm_counter:count_rtl_0|dffs[5], lpm_counter:count_rtl_0|dffs[0], lpm_counter:count_rtl_0|dffs[1], reset                                                                                                                                         ; lpm_counter:count_rtl_0|dffs[1], lpm_counter:count_rtl_0|dffs[2], lpm_counter:count_rtl_0|dffs[3], lpm_counter:count_rtl_0|dffs[4], lpm_counter:count_rtl_0|dffs[5], lpm_counter:count_rtl_0|dffs[6], lpm_counter:count_rtl_0|dffs[7], lpm_counter:count_rtl_0|dffs[8], lpm_counter:count_rtl_0|dffs[9], lpm_counter:count_rtl_0|dffs[10], lpm_counter:count_rtl_0|dffs[11], lpm_counter:count_rtl_0|dffs[4]~94, lpm_counter:count_rtl_0|dffs[5]~98, lpm_counter:count_rtl_0|dffs[6]~103                                                                                                                                       ;
+;  A  ; LC4        ; clock, lpm_counter:count_rtl_0|dffs[6], userVal[3], reset, lpm_counter:count_rtl_0|dffs[11], lpm_counter:count_rtl_0|dffs[10], lpm_counter:count_rtl_0|dffs[9], lpm_counter:count_rtl_0|dffs[8], lpm_counter:count_rtl_0|dffs[7], BCDinteger[3], lpm_counter:count_rtl_0|dffs[5]                                                                                                                                                                                ; BCDinteger[3], Mux4~2, Mux4~3, Mux5~8, Mux0~5, Mux0~7, Mux0~13, Mux1~8, Mux6~24, Mux3~11, Mux2~9, Mux6~26                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ;
+;  A  ; LC5        ; clock, lpm_counter:count_rtl_0|dffs[6], userVal[4], reset, lpm_counter:count_rtl_0|dffs[11], lpm_counter:count_rtl_0|dffs[10], lpm_counter:count_rtl_0|dffs[9], lpm_counter:count_rtl_0|dffs[8], lpm_counter:count_rtl_0|dffs[7], BCDinteger[4], lpm_counter:count_rtl_0|dffs[5]                                                                                                                                                                                ; BCDinteger[4], Mux4~4, Mux0~6, Mux1~8, Mux6~24, Mux3~11, Mux2~9, Mux5~9, Mux1~9, Mux6~26, Mux3~13                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ;
+;  A  ; LC1        ; lpm_counter:count_rtl_0|dffs[11], lpm_counter:count_rtl_0|dffs[10], lpm_counter:count_rtl_0|dffs[9], lpm_counter:count_rtl_0|dffs[8], lpm_counter:count_rtl_0|dffs[7], lpm_counter:count_rtl_0|dffs[6]                                                                                                                                                                                                                                                          ; lpm_counter:count_rtl_0|dffs[2]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ;
+;  A  ; LC9        ; clock, lpm_counter:count_rtl_0|dffs[6], lpm_counter:count_rtl_0|dffs[11], lpm_counter:count_rtl_0|dffs[10], lpm_counter:count_rtl_0|dffs[9], lpm_counter:count_rtl_0|dffs[8], lpm_counter:count_rtl_0|dffs[7], lpm_counter:count_rtl_0|dffs[0], lpm_counter:count_rtl_0|dffs[5], reset                                                                                                                                                                          ; lpm_counter:count_rtl_0|dffs[0], lpm_counter:count_rtl_0|dffs[1], lpm_counter:count_rtl_0|dffs[2], lpm_counter:count_rtl_0|dffs[3], lpm_counter:count_rtl_0|dffs[4], lpm_counter:count_rtl_0|dffs[5], lpm_counter:count_rtl_0|dffs[6], lpm_counter:count_rtl_0|dffs[7], lpm_counter:count_rtl_0|dffs[8], lpm_counter:count_rtl_0|dffs[9], lpm_counter:count_rtl_0|dffs[10], lpm_counter:count_rtl_0|dffs[11], lpm_counter:count_rtl_0|dffs[5]~98, lpm_counter:count_rtl_0|dffs[6]~103                                                                                                                                          ;
+;  A  ; LC6        ; clock, lpm_counter:count_rtl_0|dffs[6], userVal[5], reset, lpm_counter:count_rtl_0|dffs[11], lpm_counter:count_rtl_0|dffs[10], lpm_counter:count_rtl_0|dffs[9], lpm_counter:count_rtl_0|dffs[8], lpm_counter:count_rtl_0|dffs[7], BCDinteger[5], lpm_counter:count_rtl_0|dffs[5]                                                                                                                                                                                ; BCDinteger[5], Mux4~6, Mux5~8, Mux0~8, Mux0~13, Mux1~8, Mux6~24, Mux3~11, Mux2~9, Mux5~9, Mux1~9, Mux6~26, Mux3~13                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             ;
+;  A  ; LC2        ; clock, lpm_counter:count_rtl_0|dffs[2]~89, lpm_counter:count_rtl_0|dffs[11], lpm_counter:count_rtl_0|dffs[10], lpm_counter:count_rtl_0|dffs[9], lpm_counter:count_rtl_0|dffs[8], lpm_counter:count_rtl_0|dffs[7], lpm_counter:count_rtl_0|dffs[5], lpm_counter:count_rtl_0|dffs[1], lpm_counter:count_rtl_0|dffs[2], lpm_counter:count_rtl_0|dffs[0], reset                                                                                                     ; lpm_counter:count_rtl_0|dffs[2], lpm_counter:count_rtl_0|dffs[3], lpm_counter:count_rtl_0|dffs[4], lpm_counter:count_rtl_0|dffs[5], lpm_counter:count_rtl_0|dffs[6], lpm_counter:count_rtl_0|dffs[7], lpm_counter:count_rtl_0|dffs[8], lpm_counter:count_rtl_0|dffs[9], lpm_counter:count_rtl_0|dffs[10], lpm_counter:count_rtl_0|dffs[11], lpm_counter:count_rtl_0|dffs[5]~98, lpm_counter:count_rtl_0|dffs[6]~103                                                                                                                                                                                                            ;
+;  A  ; LC8        ; clock, lpm_counter:count_rtl_0|dffs[6], userVal[7], reset, lpm_counter:count_rtl_0|dffs[11], lpm_counter:count_rtl_0|dffs[10], lpm_counter:count_rtl_0|dffs[9], lpm_counter:count_rtl_0|dffs[8], lpm_counter:count_rtl_0|dffs[7], BCDinteger[7], lpm_counter:count_rtl_0|dffs[5]                                                                                                                                                                                ; BCDinteger[7], Mux4~4, Mux4~5, Mux5~8, Mux0~6, Mux0~8, Mux0~13, Mux1~8, Mux6~24, Mux3~11, Mux2~9, Mux6~26, Mux3~13                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             ;
+;  A  ; LC7        ; clock, lpm_counter:count_rtl_0|dffs[6], userVal[6], reset, lpm_counter:count_rtl_0|dffs[11], lpm_counter:count_rtl_0|dffs[10], lpm_counter:count_rtl_0|dffs[9], lpm_counter:count_rtl_0|dffs[8], lpm_counter:count_rtl_0|dffs[7], BCDinteger[6], lpm_counter:count_rtl_0|dffs[5]                                                                                                                                                                                ; BCDinteger[6], Mux4~5, Mux4~6, Mux5~8, Mux0~6, Mux0~8, Mux0~13, Mux1~8, Mux6~24, Mux3~11, Mux2~9, Mux5~9, Mux6~26, Mux3~13                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ;
+;  A  ; LC11       ; clock, lpm_counter:count_rtl_0|dffs[6], userVal[0], reset, lpm_counter:count_rtl_0|dffs[11], lpm_counter:count_rtl_0|dffs[10], lpm_counter:count_rtl_0|dffs[9], lpm_counter:count_rtl_0|dffs[8], lpm_counter:count_rtl_0|dffs[7], BCDinteger[0], lpm_counter:count_rtl_0|dffs[5]                                                                                                                                                                                ; BCDinteger[0], Mux4~2, Mux5~8, Mux0~5, Mux1~8, Mux6~24, Mux3~11, Mux2~9, Mux5~9, Mux1~9                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ;
+;  A  ; LC12       ; clock, lpm_counter:count_rtl_0|dffs[6], userVal[1], reset, lpm_counter:count_rtl_0|dffs[11], lpm_counter:count_rtl_0|dffs[10], lpm_counter:count_rtl_0|dffs[9], lpm_counter:count_rtl_0|dffs[8], lpm_counter:count_rtl_0|dffs[7], BCDinteger[1], lpm_counter:count_rtl_0|dffs[5]                                                                                                                                                                                ; BCDinteger[1], Mux4~7, Mux5~8, Mux0~7, Mux0~13, Mux6~24, Mux3~11, Mux2~9, Mux5~9, Mux1~9, Mux6~26                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ;
+;  A  ; LC3        ; clock, lpm_counter:count_rtl_0|dffs[6], userVal[2], reset, lpm_counter:count_rtl_0|dffs[11], lpm_counter:count_rtl_0|dffs[10], lpm_counter:count_rtl_0|dffs[9], lpm_counter:count_rtl_0|dffs[8], lpm_counter:count_rtl_0|dffs[7], BCDinteger[2], lpm_counter:count_rtl_0|dffs[5]                                                                                                                                                                                ; BCDinteger[2], Mux4~3, Mux4~7, Mux5~8, Mux0~5, Mux0~7, Mux0~13, Mux1~8, Mux6~24, Mux3~11, Mux2~9, Mux5~9, Mux1~9                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ;
+;  B  ; LC19       ; MOSI                                                                                                                                                                                                                                                                                                                                                                                                                                                            ; MOSI_out                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ;
+;  B  ; LC27       ; STE                                                                                                                                                                                                                                                                                                                                                                                                                                                             ; STE_out                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ;
+;  B  ; LC29       ; CLK                                                                                                                                                                                                                                                                                                                                                                                                                                                             ; CLK_out                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ;
+;  C  ; LC43       ; SOMI                                                                                                                                                                                                                                                                                                                                                                                                                                                            ; SOMI_out                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ;
+;  F  ; LC88       ; clock, lpm_counter:count_rtl_0|dffs[3]~91, lpm_counter:count_rtl_0|dffs[1], lpm_counter:count_rtl_0|dffs[3], lpm_counter:count_rtl_0|dffs[0], lpm_counter:count_rtl_0|dffs[2], reset                                                                                                                                                                                                                                                                            ; lpm_counter:count_rtl_0|dffs[3], lpm_counter:count_rtl_0|dffs[4], lpm_counter:count_rtl_0|dffs[5], lpm_counter:count_rtl_0|dffs[6], lpm_counter:count_rtl_0|dffs[7], lpm_counter:count_rtl_0|dffs[8], lpm_counter:count_rtl_0|dffs[9], lpm_counter:count_rtl_0|dffs[10], lpm_counter:count_rtl_0|dffs[11], lpm_counter:count_rtl_0|dffs[5]~98, lpm_counter:count_rtl_0|dffs[6]~103                                                                                                                                                                                                                                             ;
+;  F  ; LC86       ; clock, lpm_counter:count_rtl_0|dffs[4]~94, lpm_counter:count_rtl_0|dffs[0], lpm_counter:count_rtl_0|dffs[4], lpm_counter:count_rtl_0|dffs[2], lpm_counter:count_rtl_0|dffs[3], lpm_counter:count_rtl_0|dffs[1], reset                                                                                                                                                                                                                                           ; lpm_counter:count_rtl_0|dffs[4], lpm_counter:count_rtl_0|dffs[5], lpm_counter:count_rtl_0|dffs[6], lpm_counter:count_rtl_0|dffs[7], lpm_counter:count_rtl_0|dffs[8], lpm_counter:count_rtl_0|dffs[9], lpm_counter:count_rtl_0|dffs[10], lpm_counter:count_rtl_0|dffs[11], lpm_counter:count_rtl_0|dffs[4]~94, lpm_counter:count_rtl_0|dffs[6]~103                                                                                                                                                                                                                                                                              ;
+;  F  ; LC82       ; clock, lpm_counter:count_rtl_0|dffs[5]~98, lpm_counter:count_rtl_0|dffs[5], lpm_counter:count_rtl_0|dffs[1], lpm_counter:count_rtl_0|dffs[0], lpm_counter:count_rtl_0|dffs[2], lpm_counter:count_rtl_0|dffs[3], lpm_counter:count_rtl_0|dffs[4], reset, lpm_counter:count_rtl_0|dffs[11], lpm_counter:count_rtl_0|dffs[10], lpm_counter:count_rtl_0|dffs[9], lpm_counter:count_rtl_0|dffs[8], lpm_counter:count_rtl_0|dffs[7], lpm_counter:count_rtl_0|dffs[6]  ; lpm_counter:count_rtl_0|dffs[0], lpm_counter:count_rtl_0|dffs[1], lpm_counter:count_rtl_0|dffs[2], lpm_counter:count_rtl_0|dffs[5], lpm_counter:count_rtl_0|dffs[6], lpm_counter:count_rtl_0|dffs[7], lpm_counter:count_rtl_0|dffs[8], lpm_counter:count_rtl_0|dffs[9], lpm_counter:count_rtl_0|dffs[10], lpm_counter:count_rtl_0|dffs[11], LEDswitch, BCDinteger[0], BCDinteger[1], BCDinteger[2], BCDinteger[3], BCDinteger[4], BCDinteger[5], BCDinteger[6], BCDinteger[7], lpm_counter:count_rtl_0|dffs[3]~91, lpm_counter:count_rtl_0|dffs[4]~94, lpm_counter:count_rtl_0|dffs[5]~98, lpm_counter:count_rtl_0|dffs[6]~103 ;
+;  F  ; LC84       ; clock, lpm_counter:count_rtl_0|dffs[6]~103, lpm_counter:count_rtl_0|dffs[8], reset, lpm_counter:count_rtl_0|dffs[4], lpm_counter:count_rtl_0|dffs[3], lpm_counter:count_rtl_0|dffs[2], lpm_counter:count_rtl_0|dffs[0], lpm_counter:count_rtl_0|dffs[1], lpm_counter:count_rtl_0|dffs[5], lpm_counter:count_rtl_0|dffs[7], lpm_counter:count_rtl_0|dffs[11], lpm_counter:count_rtl_0|dffs[10], lpm_counter:count_rtl_0|dffs[9], lpm_counter:count_rtl_0|dffs[6] ; lpm_counter:count_rtl_0|dffs[0], lpm_counter:count_rtl_0|dffs[1], lpm_counter:count_rtl_0|dffs[6], lpm_counter:count_rtl_0|dffs[7], lpm_counter:count_rtl_0|dffs[8], lpm_counter:count_rtl_0|dffs[9], lpm_counter:count_rtl_0|dffs[10], lpm_counter:count_rtl_0|dffs[11], LEDswitch, BCDinteger[0], BCDinteger[1], BCDinteger[2], BCDinteger[3], BCDinteger[4], BCDinteger[5], BCDinteger[6], BCDinteger[7], lpm_counter:count_rtl_0|dffs[2]~89, lpm_counter:count_rtl_0|dffs[3]~91, lpm_counter:count_rtl_0|dffs[4]~94, lpm_counter:count_rtl_0|dffs[5]                                                                       ;
+;  F  ; LC92       ; clock, lpm_counter:count_rtl_0|dffs[5], lpm_counter:count_rtl_0|dffs[11], lpm_counter:count_rtl_0|dffs[10], lpm_counter:count_rtl_0|dffs[9], lpm_counter:count_rtl_0|dffs[8], lpm_counter:count_rtl_0|dffs[7], lpm_counter:count_rtl_0|dffs[6], lpm_counter:count_rtl_0|dffs[1], lpm_counter:count_rtl_0|dffs[0], lpm_counter:count_rtl_0|dffs[2], lpm_counter:count_rtl_0|dffs[3], lpm_counter:count_rtl_0|dffs[4], reset                                      ; lpm_counter:count_rtl_0|dffs[0], lpm_counter:count_rtl_0|dffs[1], lpm_counter:count_rtl_0|dffs[2], lpm_counter:count_rtl_0|dffs[6], lpm_counter:count_rtl_0|dffs[7], lpm_counter:count_rtl_0|dffs[8], lpm_counter:count_rtl_0|dffs[9], lpm_counter:count_rtl_0|dffs[10], lpm_counter:count_rtl_0|dffs[11], LEDswitch, BCDinteger[0], BCDinteger[1], BCDinteger[2], BCDinteger[3], BCDinteger[4], BCDinteger[5], BCDinteger[6], BCDinteger[7], lpm_counter:count_rtl_0|dffs[2]~89, lpm_counter:count_rtl_0|dffs[3]~91, lpm_counter:count_rtl_0|dffs[4]~94, lpm_counter:count_rtl_0|dffs[5]                                      ;
+;  F  ; LC89       ; clock, lpm_counter:count_rtl_0|dffs[5], lpm_counter:count_rtl_0|dffs[7], lpm_counter:count_rtl_0|dffs[11], lpm_counter:count_rtl_0|dffs[10], lpm_counter:count_rtl_0|dffs[9], lpm_counter:count_rtl_0|dffs[8], lpm_counter:count_rtl_0|dffs[6], lpm_counter:count_rtl_0|dffs[1], lpm_counter:count_rtl_0|dffs[0], lpm_counter:count_rtl_0|dffs[2], lpm_counter:count_rtl_0|dffs[3], lpm_counter:count_rtl_0|dffs[4], reset                                      ; lpm_counter:count_rtl_0|dffs[0], lpm_counter:count_rtl_0|dffs[1], lpm_counter:count_rtl_0|dffs[2], lpm_counter:count_rtl_0|dffs[6], lpm_counter:count_rtl_0|dffs[7], lpm_counter:count_rtl_0|dffs[8], lpm_counter:count_rtl_0|dffs[9], lpm_counter:count_rtl_0|dffs[10], lpm_counter:count_rtl_0|dffs[11], LEDswitch, BCDinteger[0], BCDinteger[1], BCDinteger[2], BCDinteger[3], BCDinteger[4], BCDinteger[5], BCDinteger[6], BCDinteger[7], lpm_counter:count_rtl_0|dffs[2]~89, lpm_counter:count_rtl_0|dffs[3]~91, lpm_counter:count_rtl_0|dffs[4]~94, lpm_counter:count_rtl_0|dffs[5]                                      ;
+;  F  ; LC90       ; clock, lpm_counter:count_rtl_0|dffs[7], lpm_counter:count_rtl_0|dffs[5], lpm_counter:count_rtl_0|dffs[8], lpm_counter:count_rtl_0|dffs[11], lpm_counter:count_rtl_0|dffs[10], lpm_counter:count_rtl_0|dffs[9], lpm_counter:count_rtl_0|dffs[6], lpm_counter:count_rtl_0|dffs[1], lpm_counter:count_rtl_0|dffs[0], lpm_counter:count_rtl_0|dffs[2], lpm_counter:count_rtl_0|dffs[3], lpm_counter:count_rtl_0|dffs[4], reset                                      ; lpm_counter:count_rtl_0|dffs[0], lpm_counter:count_rtl_0|dffs[1], lpm_counter:count_rtl_0|dffs[2], lpm_counter:count_rtl_0|dffs[6], lpm_counter:count_rtl_0|dffs[7], lpm_counter:count_rtl_0|dffs[8], lpm_counter:count_rtl_0|dffs[9], lpm_counter:count_rtl_0|dffs[10], lpm_counter:count_rtl_0|dffs[11], LEDswitch, BCDinteger[0], BCDinteger[1], BCDinteger[2], BCDinteger[3], BCDinteger[4], BCDinteger[5], BCDinteger[6], BCDinteger[7], lpm_counter:count_rtl_0|dffs[2]~89, lpm_counter:count_rtl_0|dffs[3]~91, lpm_counter:count_rtl_0|dffs[4]~94, lpm_counter:count_rtl_0|dffs[6]~103, lpm_counter:count_rtl_0|dffs[5] ;
+;  F  ; LC93       ; clock, reset, lpm_counter:count_rtl_0|dffs[11], lpm_counter:count_rtl_0|dffs[10], lpm_counter:count_rtl_0|dffs[9], lpm_counter:count_rtl_0|dffs[8], lpm_counter:count_rtl_0|dffs[7], lpm_counter:count_rtl_0|dffs[6], lpm_counter:count_rtl_0|dffs[5]                                                                                                                                                                                                           ; chooseLED, LEDswitch~6, Mux4~2, Mux4~3, Mux4~4, Mux4~5, Mux4~6, Mux4~7, Mux5~8, Mux0~5, Mux0~6, Mux0~7, Mux0~8, Mux0~13, Mux1~8, Mux6~24, Mux3~11, Mux2~9, Mux5~9, Mux1~9, Mux6~26, Mux3~13                                                                                                                                                                                                                                                                                                                                                                                                                                    ;
+;  F  ; LC96       ; clock, lpm_counter:count_rtl_0|dffs[1], lpm_counter:count_rtl_0|dffs[0], lpm_counter:count_rtl_0|dffs[2], lpm_counter:count_rtl_0|dffs[3], lpm_counter:count_rtl_0|dffs[4], reset, lpm_counter:count_rtl_0|dffs[5], lpm_counter:count_rtl_0|dffs[6], lpm_counter:count_rtl_0|dffs[7], lpm_counter:count_rtl_0|dffs[8], lpm_counter:count_rtl_0|dffs[9], lpm_counter:count_rtl_0|dffs[10], lpm_counter:count_rtl_0|dffs[11]                                      ; lpm_counter:count_rtl_0|dffs[0], lpm_counter:count_rtl_0|dffs[1], lpm_counter:count_rtl_0|dffs[2], lpm_counter:count_rtl_0|dffs[6], lpm_counter:count_rtl_0|dffs[7], lpm_counter:count_rtl_0|dffs[8], lpm_counter:count_rtl_0|dffs[9], lpm_counter:count_rtl_0|dffs[10], lpm_counter:count_rtl_0|dffs[11], LEDswitch, BCDinteger[0], BCDinteger[1], BCDinteger[2], BCDinteger[3], BCDinteger[4], BCDinteger[5], BCDinteger[6], BCDinteger[7], lpm_counter:count_rtl_0|dffs[2]~89, lpm_counter:count_rtl_0|dffs[3]~91, lpm_counter:count_rtl_0|dffs[4]~94, lpm_counter:count_rtl_0|dffs[6]~103, lpm_counter:count_rtl_0|dffs[5] ;
+;  F  ; LC94       ; LEDswitch                                                                                                                                                                                                                                                                                                                                                                                                                                                       ; chooseLED2                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ;
+;  F  ; LC95       ; clock, lpm_counter:count_rtl_0|dffs[7], lpm_counter:count_rtl_0|dffs[8], lpm_counter:count_rtl_0|dffs[5], lpm_counter:count_rtl_0|dffs[9], lpm_counter:count_rtl_0|dffs[11], lpm_counter:count_rtl_0|dffs[10], lpm_counter:count_rtl_0|dffs[6], lpm_counter:count_rtl_0|dffs[1], lpm_counter:count_rtl_0|dffs[0], lpm_counter:count_rtl_0|dffs[2], lpm_counter:count_rtl_0|dffs[3], lpm_counter:count_rtl_0|dffs[4], reset                                      ; lpm_counter:count_rtl_0|dffs[0], lpm_counter:count_rtl_0|dffs[1], lpm_counter:count_rtl_0|dffs[2], lpm_counter:count_rtl_0|dffs[6], lpm_counter:count_rtl_0|dffs[7], lpm_counter:count_rtl_0|dffs[8], lpm_counter:count_rtl_0|dffs[9], lpm_counter:count_rtl_0|dffs[10], lpm_counter:count_rtl_0|dffs[11], LEDswitch, BCDinteger[0], BCDinteger[1], BCDinteger[2], BCDinteger[3], BCDinteger[4], BCDinteger[5], BCDinteger[6], BCDinteger[7], lpm_counter:count_rtl_0|dffs[2]~89, lpm_counter:count_rtl_0|dffs[3]~91, lpm_counter:count_rtl_0|dffs[4]~94, lpm_counter:count_rtl_0|dffs[6]~103, lpm_counter:count_rtl_0|dffs[5] ;
+;  F  ; LC87       ; lpm_counter:count_rtl_0|dffs[11], lpm_counter:count_rtl_0|dffs[10], lpm_counter:count_rtl_0|dffs[9], lpm_counter:count_rtl_0|dffs[8], lpm_counter:count_rtl_0|dffs[7], lpm_counter:count_rtl_0|dffs[6], lpm_counter:count_rtl_0|dffs[5]                                                                                                                                                                                                                         ; lpm_counter:count_rtl_0|dffs[3]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ;
+;  F  ; LC85       ; lpm_counter:count_rtl_0|dffs[11], lpm_counter:count_rtl_0|dffs[10], lpm_counter:count_rtl_0|dffs[9], lpm_counter:count_rtl_0|dffs[8], lpm_counter:count_rtl_0|dffs[7], lpm_counter:count_rtl_0|dffs[6], lpm_counter:count_rtl_0|dffs[5], lpm_counter:count_rtl_0|dffs[1], lpm_counter:count_rtl_0|dffs[4]                                                                                                                                                       ; lpm_counter:count_rtl_0|dffs[4]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ;
+;  F  ; LC81       ; lpm_counter:count_rtl_0|dffs[5], lpm_counter:count_rtl_0|dffs[1], lpm_counter:count_rtl_0|dffs[0], lpm_counter:count_rtl_0|dffs[2], lpm_counter:count_rtl_0|dffs[3]                                                                                                                                                                                                                                                                                             ; lpm_counter:count_rtl_0|dffs[5]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ;
+;  F  ; LC83       ; lpm_counter:count_rtl_0|dffs[11], reset, lpm_counter:count_rtl_0|dffs[4], lpm_counter:count_rtl_0|dffs[3], lpm_counter:count_rtl_0|dffs[2], lpm_counter:count_rtl_0|dffs[0], lpm_counter:count_rtl_0|dffs[1], lpm_counter:count_rtl_0|dffs[5], lpm_counter:count_rtl_0|dffs[10], lpm_counter:count_rtl_0|dffs[9]                                                                                                                                                ; lpm_counter:count_rtl_0|dffs[6]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ;
+;  F  ; LC91       ;                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ; dec_pt                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ;
+;  G  ; LC105      ; Mux4~2, Mux4~3, Mux4~4, Mux4~5, Mux4~6, Mux4~7                                                                                                                                                                                                                                                                                                                                                                                                                  ; LED[2]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ;
+;  G  ; LC107      ; Mux5~9, BCDinteger[0], BCDinteger[2], LEDswitch, BCDinteger[1], BCDinteger[3], BCDinteger[6], BCDinteger[7], BCDinteger[5]                                                                                                                                                                                                                                                                                                                                      ; LED[1]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ;
+;  G  ; LC97       ; Mux0~5, Mux0~6, Mux0~7, Mux0~8, BCDinteger[2], BCDinteger[3], LEDswitch, BCDinteger[1], BCDinteger[7], BCDinteger[6], BCDinteger[5]                                                                                                                                                                                                                                                                                                                             ; LED[6]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ;
+;  G  ; LC99       ; Mux1~9, BCDinteger[5], LEDswitch, BCDinteger[6], BCDinteger[4], BCDinteger[7], BCDinteger[0], BCDinteger[2], BCDinteger[3]                                                                                                                                                                                                                                                                                                                                      ; LED[5]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ;
+;  G  ; LC109      ; Mux6~26, LEDswitch, BCDinteger[3], BCDinteger[0], BCDinteger[2], BCDinteger[1], BCDinteger[5], BCDinteger[4], BCDinteger[6], BCDinteger[7]                                                                                                                                                                                                                                                                                                                      ; LED[0]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ;
+;  G  ; LC104      ; Mux3~13, BCDinteger[4], BCDinteger[5], BCDinteger[7], LEDswitch, BCDinteger[6], BCDinteger[0], BCDinteger[1], BCDinteger[3], BCDinteger[2]                                                                                                                                                                                                                                                                                                                      ; LED[3]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ;
+;  G  ; LC101      ; BCDinteger[2], LEDswitch, BCDinteger[1], BCDinteger[0], BCDinteger[6], BCDinteger[5], BCDinteger[4], BCDinteger[7], BCDinteger[3]                                                                                                                                                                                                                                                                                                                               ; LED[4]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ;
+;  G  ; LC98       ; BCDinteger[4], BCDinteger[5], LEDswitch, BCDinteger[0], BCDinteger[1], BCDinteger[2]                                                                                                                                                                                                                                                                                                                                                                            ; Mux1~8                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ;
+;  G  ; LC108      ; BCDinteger[7], BCDinteger[5], LEDswitch, BCDinteger[3], BCDinteger[1], BCDinteger[4], BCDinteger[6]                                                                                                                                                                                                                                                                                                                                                             ; Mux6~24                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ;
+;  G  ; LC103      ; BCDinteger[4], BCDinteger[5], BCDinteger[7], LEDswitch, BCDinteger[6]                                                                                                                                                                                                                                                                                                                                                                                           ; Mux3~11                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ;
+;  G  ; LC106      ; BCDinteger[4], BCDinteger[6], BCDinteger[5], LEDswitch, BCDinteger[0], BCDinteger[2], BCDinteger[1]                                                                                                                                                                                                                                                                                                                                                             ; Mux5~8                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ;
+;  H  ; LC115      ;                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ; clock_en                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ;
++-----+------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
++-------------------------------------------------------------------------+
+; Fitter Device Options                                                   ;
++----------------------------------------------+--------------------------+
+; Option                                       ; Setting                  ;
++----------------------------------------------+--------------------------+
+; Enable user-supplied start-up clock (CLKUSR) ; Off                      ;
+; Enable device-wide reset (DEV_CLRn)          ; Off                      ;
+; Enable device-wide output enable (DEV_OE)    ; Off                      ;
+; Enable INIT_DONE output                      ; Off                      ;
+; Configuration scheme                         ; Passive Serial           ;
+; Reserve all unused pins                      ; As output driving ground ;
+; Security bit                                 ; Off                      ;
+; Base pin-out file on sameframe device        ; Off                      ;
++----------------------------------------------+--------------------------+
+
+
++-----------------+
+; Fitter Messages ;
++-----------------+
+Info: *******************************************************************
+Info: Running Quartus II Fitter
+    Info: Version 10.0 Build 218 06/27/2010 SJ Full Version
+    Info: Processing started: Wed Dec 01 02:41:43 2010
+Info: Command: quartus_fit --read_settings_files=off --write_settings_files=off microproject -c microproject
+Info: Parallel compilation is enabled and will use 2 of the 2 processors detected
+Info: Selected device EPM7128AELC84-10 for design "microproject"
+Warning: Ignored locations or region assignments to the following nodes
+    Warning: Node "TCK" is assigned to location or region, but does not exist in design
+    Warning: Node "TDI" is assigned to location or region, but does not exist in design
+    Warning: Node "TDO" is assigned to location or region, but does not exist in design
+    Warning: Node "TMS" is assigned to location or region, but does not exist in design
+    Warning: Node "userVal" is assigned to location or region, but does not exist in design
+Info: Quartus II Fitter was successful. 0 errors, 6 warnings
+    Info: Peak virtual memory: 228 megabytes
+    Info: Processing ended: Wed Dec 01 02:41:47 2010
+    Info: Elapsed time: 00:00:04
+    Info: Total CPU time (on all processors): 00:00:01
+
+

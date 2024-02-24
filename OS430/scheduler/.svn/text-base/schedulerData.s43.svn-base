@@ -1,0 +1,8 @@
+#include "config.h"
+  .bss
+  align WORD
+_scheduler_queueSize::                  ds 2
+_scheduler_maximumTime::                ds 2
+_scheduler_nextID::                     ds 2
+_scheduler_time::                       ds 4
+_scheduler_queue::                      ds (SCHEDULER_QUEUE_SIZE * 2)

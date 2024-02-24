@@ -1,0 +1,147 @@
+ -- Copyright (C) 1991-2010 Altera Corporation
+ -- Your use of Altera Corporation's design tools, logic functions 
+ -- and other software and tools, and its AMPP partner logic 
+ -- functions, and any output files from any of the foregoing 
+ -- (including device programming or simulation files), and any 
+ -- associated documentation or information are expressly subject 
+ -- to the terms and conditions of the Altera Program License 
+ -- Subscription Agreement, Altera MegaCore Function License 
+ -- Agreement, or other applicable license agreement, including, 
+ -- without limitation, that your use is for the sole purpose of 
+ -- programming logic devices manufactured by Altera and sold by 
+ -- Altera or its authorized distributors.  Please refer to the 
+ -- applicable agreement for further details.
+ -- 
+ -- This is a Quartus II output file. It is for reporting purposes only, and is
+ -- not intended for use as a Quartus II input file. This file cannot be used
+ -- to make Quartus II pin assignments - for instructions on how to make pin
+ -- assignments, please see Quartus II help.
+ ---------------------------------------------------------------------------------
+
+
+
+ ---------------------------------------------------------------------------------
+ -- NC            : No Connect. This pin has no internal connection to the device.
+ -- DNU           : Do Not Use. This pin MUST NOT be connected.
+ -- VCCINT        : Dedicated power pin, which MUST be connected to VCC  (3.3V).
+ -- VCCIO         : Dedicated power pin, which MUST be connected to VCC
+ --                 of its bank.
+ -- GND           : Dedicated ground pin. Dedicated GND pins MUST be connected to GND.
+ --					It can also be used to report unused dedicated pins. The connection
+ --					on the board for unused dedicated pins depends on whether this will
+ --					be used in a future design. One example is device migration. When
+ --					using device migration, refer to the device pin-tables. If it is a
+ --					GND pin in the pin table or if it will not be used in a future design
+ --					for another purpose the it MUST be connected to GND. If it is an unused
+ --					dedicated pin, then it can be connected to a valid signal on the board
+ --					(low, high, or toggling) if that signal is required for a different
+ --					revision of the design.
+ -- GND+          : Unused input pin. It can also be used to report unused dual-purpose pins.
+ --					This pin should be connected to GND. It may also be connected  to a
+ --					valid signal  on the board  (low, high, or toggling)  if that signal
+ --					is required for a different revision of the design.
+ -- GND*          : Unused  I/O  pin. Connect each pin marked GND* directly to GND
+ --           	    or leave it unconnected.
+ -- RESERVED      : Unused I/O pin, which MUST be left unconnected.
+ -- RESERVED_INPUT    : Pin is tri-stated and should be connected to the board.
+ -- RESERVED_INPUT_WITH_WEAK_PULLUP    : Pin is tri-stated with internal weak pull-up resistor.
+ -- RESERVED_INPUT_WITH_BUS_HOLD       : Pin is tri-stated with bus-hold circuitry.
+ -- RESERVED_OUTPUT_DRIVEN_HIGH        : Pin is output driven high.
+ -- NON_MIGRATABLE: This pin cannot be migrated.
+ ---------------------------------------------------------------------------------
+
+
+
+ ---------------------------------------------------------------------------------
+ -- Pin directions (input, output or bidir) are based on device operating in user mode.
+ ---------------------------------------------------------------------------------
+
+Quartus II Version 10.0 Build 218 06/27/2010 SJ Full Version
+CHIP  "McGumps"  ASSIGNED TO AN: EPM7128AELC84-10
+
+Pin Name/Usage               : Location  : Dir.   : I/O Standard      : Voltage : I/O Bank  : User Assignment
+-------------------------------------------------------------------------------------------------------------
+GND+                         : 1         :        :                   :         :           :                
+msp430Port5Pin7              : 2         : input  : 3.3-V LVTTL       :         :           : Y              
+VCCINT                       : 3         : power  :                   : 3.3V    :           :                
+msp430Port1Pin0              : 4         : input  : 3.3-V LVTTL       :         :           : Y              
+msp430Port1Pin1              : 5         : input  : 3.3-V LVTTL       :         :           : Y              
+msp430Port1Pin2              : 6         : input  : 3.3-V LVTTL       :         :           : Y              
+GND                          : 7         : gnd    :                   :         :           :                
+msp430Port1Pin3              : 8         : input  : 3.3-V LVTTL       :         :           : Y              
+msp430Port1Pin4              : 9         : input  : 3.3-V LVTTL       :         :           : Y              
+msp430Port1Pin5              : 10        : input  : 3.3-V LVTTL       :         :           : Y              
+msp430Port1Pin6              : 11        : input  : 3.3-V LVTTL       :         :           : Y              
+msp430Port1Pin7              : 12        : input  : 3.3-V LVTTL       :         :           : Y              
+VCCIO                        : 13        : power  :                   : 3.3V    :           :                
+TDI                          : 14        : input  : 3.3-V LVTTL       :         :           : Y              
+h1Pin24                      : 15        : output : 3.3-V LVTTL       :         :           : Y              
+h1Pin26                      : 16        : output : 3.3-V LVTTL       :         :           : Y              
+h1Pin28                      : 17        : output : 3.3-V LVTTL       :         :           : Y              
+h1Pin30                      : 18        : input  : 3.3-V LVTTL       :         :           : Y              
+GND                          : 19        : gnd    :                   :         :           :                
+h1Pin32                      : 20        : output : 3.3-V LVTTL       :         :           : Y              
+h1Pin34                      : 21        : output : 3.3-V LVTTL       :         :           : Y              
+h1Pin36                      : 22        : output : 3.3-V LVTTL       :         :           : Y              
+TMS                          : 23        : input  : 3.3-V LVTTL       :         :           : Y              
+msp430Port5Pin0              : 24        : input  : 3.3-V LVTTL       :         :           : Y              
+msp430Port5Pin1              : 25        : input  : 3.3-V LVTTL       :         :           : Y              
+VCCIO                        : 26        : power  :                   : 3.3V    :           :                
+msp430Port5Pin2              : 27        : output : 3.3-V LVTTL       :         :           : Y              
+msp430Port5Pin3              : 28        : input  : 3.3-V LVTTL       :         :           : Y              
+msp430Port5Pin4              : 29        : input  : 3.3-V LVTTL       :         :           : Y              
+msp430Port5Pin5              : 30        : input  : 3.3-V LVTTL       :         :           : Y              
+msp430Port5Pin6              : 31        : input  : 3.3-V LVTTL       :         :           : Y              
+GND                          : 32        : gnd    :                   :         :           :                
+msp430Port4Pin0              : 33        : input  : 3.3-V LVTTL       :         :           : Y              
+msp430Port4Pin1              : 34        : input  : 3.3-V LVTTL       :         :           : Y              
+msp430Port4Pin2              : 35        : input  : 3.3-V LVTTL       :         :           : Y              
+msp430Port4Pin3              : 36        : input  : 3.3-V LVTTL       :         :           : Y              
+msp430Port4Pin4              : 37        : input  : 3.3-V LVTTL       :         :           : Y              
+VCCIO                        : 38        : power  :                   : 3.3V    :           :                
+msp430Port4Pin5              : 39        : input  : 3.3-V LVTTL       :         :           : Y              
+msp430Port4Pin6              : 40        : input  : 3.3-V LVTTL       :         :           : Y              
+msp430Port4Pin7              : 41        : input  : 3.3-V LVTTL       :         :           : Y              
+GND                          : 42        : gnd    :                   :         :           :                
+VCCINT                       : 43        : power  :                   : 3.3V    :           :                
+msp430Port2Pin7              : 44        : input  : 3.3-V LVTTL       :         :           : Y              
+msp430Port2Pin6              : 45        : input  : 3.3-V LVTTL       :         :           : Y              
+msp430Port2Pin5              : 46        : input  : 3.3-V LVTTL       :         :           : Y              
+GND                          : 47        : gnd    :                   :         :           :                
+msp430Port2Pin4              : 48        : input  : 3.3-V LVTTL       :         :           : Y              
+msp430Port2Pin3              : 49        : input  : 3.3-V LVTTL       :         :           : Y              
+msp430Port2Pin2              : 50        : input  : 3.3-V LVTTL       :         :           : Y              
+msp430Port2Pin1              : 51        : input  : 3.3-V LVTTL       :         :           : Y              
+msp430Port2Pin0              : 52        : input  : 3.3-V LVTTL       :         :           : Y              
+VCCIO                        : 53        : power  :                   : 3.3V    :           :                
+h1Pin12                      : 54        : output : 3.3-V LVTTL       :         :           : Y              
+h1Pin14                      : 55        : output : 3.3-V LVTTL       :         :           : Y              
+h1Pin16                      : 56        : output : 3.3-V LVTTL       :         :           : Y              
+h1Pin18                      : 57        : output : 3.3-V LVTTL       :         :           : Y              
+ssdSegments[7]               : 58        : output : 3.3-V LVTTL       :         :           : Y              
+GND                          : 59        : gnd    :                   :         :           :                
+ssdLeftEnable                : 60        : output : 3.3-V LVTTL       :         :           : Y              
+ssdRightEnable               : 61        : output : 3.3-V LVTTL       :         :           : Y              
+TCK                          : 62        : input  : 3.3-V LVTTL       :         :           : Y              
+ssdSegments[6]               : 63        : output : 3.3-V LVTTL       :         :           : Y              
+ssdSegments[5]               : 64        : output : 3.3-V LVTTL       :         :           : Y              
+ssdSegments[4]               : 65        : output : 3.3-V LVTTL       :         :           : Y              
+VCCIO                        : 66        : power  :                   : 3.3V    :           :                
+ssdSegments[3]               : 67        : output : 3.3-V LVTTL       :         :           : Y              
+ssdSegments[2]               : 68        : output : 3.3-V LVTTL       :         :           : Y              
+ssdSegments[1]               : 69        : output : 3.3-V LVTTL       :         :           : Y              
+ssdSegments[0]               : 70        : output : 3.3-V LVTTL       :         :           : Y              
+TDO                          : 71        : output : 3.3-V LVTTL       :         :           : Y              
+GND                          : 72        : gnd    :                   :         :           :                
+clockEnable                  : 73        : output : 3.3-V LVTTL       :         :           : Y              
+h1Pin5                       : 74        : output : 3.3-V LVTTL       :         :           : Y              
+h1Pin7                       : 75        : output : 3.3-V LVTTL       :         :           : Y              
+h1Pin9                       : 76        : output : 3.3-V LVTTL       :         :           : Y              
+h1Pin10                      : 77        : output : 3.3-V LVTTL       :         :           : Y              
+VCCIO                        : 78        : power  :                   : 3.3V    :           :                
+h1Pin8                       : 79        : output : 3.3-V LVTTL       :         :           : Y              
+h1Pin6                       : 80        : output : 3.3-V LVTTL       :         :           : Y              
+h1Pin4                       : 81        : output : 3.3-V LVTTL       :         :           : Y              
+GND                          : 82        : gnd    :                   :         :           :                
+clk                          : 83        : input  : 3.3-V LVTTL       :         :           : Y              
+GND+                         : 84        :        :                   :         :           :                

@@ -1,0 +1,89 @@
+K 25
+svn:wc:ra_dav:version-url
+V 33
+/svn/!svn/ver/25/Components/debug
+END
+hyperterm.hzo
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/25/Components/debug/hyperterm.hzo
+END
+keyboard.hzo
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/25/Components/debug/keyboard.hzo
+END
+timer.hzo
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/25/Components/debug/timer.hzo
+END
+wifiProtocol.hzo
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/25/Components/debug/wifiProtocol.hzo
+END
+lcd.hzo
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/25/Components/debug/lcd.hzo
+END
+main.hzo
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/25/Components/debug/main.hzo
+END
+keyboard_mainc.hzo
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/25/Components/debug/keyboard_mainc.hzo
+END
+crt0.hzo
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/25/Components/debug/crt0.hzo
+END
+FinalProject.hzx
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/25/Components/debug/FinalProject.hzx
+END
+game.hzo
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/25/Components/debug/game.hzo
+END
+uart.hzo
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/25/Components/debug/uart.hzo
+END
+cc2500.hzo
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/25/Components/debug/cc2500.hzo
+END
+keypad.hzo
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/25/Components/debug/keypad.hzo
+END
+FinalProject.map
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/25/Components/debug/FinalProject.map
+END

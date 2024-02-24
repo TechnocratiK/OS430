@@ -1,0 +1,395 @@
+#include "game.h"
+#include "common.h"
+#include "hyperterm.h"
+#include "timer.h"
+#include "wifiProtocol.h"
+
+
+int KEYPRESSED;
+int KEY[5];
+int KEYBUF;
+int NUMBER[4];
+int RECEIVED[4];
+int NEWPACKET;
+char THIS_PLAYER_NAME[20];
+char OTHER_PLAYER_NAME[20];
+int INTERVAL;
+
+
+/***********************************************************/
+/*  resetKeyBuf(void)
+/*	Inputs:
+/*		- KEY[5]: Global variable recording key pressed
+/*	Outputs:
+/*		- NONE
+/*	Function:
+/*		Resets the previous key pressed buffer to ASCII '0'
+/***********************************************************/
+void resetKeyBuf(void){
+  KEY[0] = 0x30;
+  KEY[1] = 0x30;
+  KEY[2] = 0x30;
+  KEY[3] = 0x30;
+  KEY[4] = 0x30;
+}
+
+
+/***********************************************************/
+/*  readRx(void)
+/*	Inputs:
+/*		- NEWPACKET: Global variable to signify that new data has arrived
+/*		- RECEIVED[4]: Global buffer, holds the data received
+/*	Outputs:
+/*		- Sends out the answer to the other player
+/*	Function:
+/*		Function called in the game while loop while waiting for user input
+/*		Checks if new data has arrived. If so:
+/*			computes: Matching = Bulls, Close = cows
+/*			Fires answer to other player
+/***********************************************************/
+void readRx(void){
+  int i, k;
+  int cows = 0, bulls = 0;
+  
+  // New packets are recorded in the RECEIVED[4] buffer
+  // If we received a new packet, process it by scanning RECEIVED and NUMBERS
+  if(!NEWPACKET)
+    return;
+		
+  // The code can only get here if we received a new packet
+  // First count the Bulls
+  for(i = 0; i < 4; i++)
+    if(RECEIVED[i] == NUMBER[i]){
+	bulls++;
+	// Invalidate founbd value to avoid double counting when looking for cows
+	RECEIVED[i] = 15;
+    }
+	
+  // Then count the cows
+  for(i = 0; i < 4; i++)
+    for(k = 0; k < 4; k++)
+      if(RECEIVED[k] == NUMBER[i])
+        cows++;
+  // At this point, cows and bulls are up to date
+	
+  // Reset flag
+  NEWPACKET = 0;
+	
+	
+/************************************************************
+TODO: Implement send a packet
+/*************************************************************/
+  hyperterm_printf("Bulls: %d\tCows: %d\n\r\n", bulls, cows);
+
+  if(bulls ==4)
+    hyperterm_printf("YOU WIN!!\n\r");
+  else{
+    hyperterm_printf("Type guess for other player's number[Enter to send]\n\r");
+  }
+}
+
+
+
+/************************************************************
+  FSM implemented in playgame
+  Comments given on a state per state basis
+  States are highlighted
+/************************************************************/
+
+void playGame(void){
+
+
+  int STATE = PRINT_INIT, i = 0, firstTime = 1;
+  while(1){
+	
+  switch(STATE){
+
+
+//STATE: PRINT_INIT---------------------------------------------
+//------ Game initialization: Print cow and prompt for user name
+    case PRINT_INIT:
+      if(firstTime){
+        // First format user name
+        for(i = 0; i < 20; i++)
+              THIS_PLAYER_NAME[i] = '\0';
+        
+        // Print logo
+        hyperterm_printf("                    _______________________\n\r");
+        hyperterm_printf("          __       /     COWS & BULLS      \\\n\r");
+        hyperterm_printf("        ~(oo)~    (        Moooo!            )\n\r");
+        hyperterm_printf("  /-------\\/  ----\\_______________________/\n\r");
+        hyperterm_printf(" / |     ||\n\r");
+        hyperterm_printf("*  ||----||\n\r");
+        hyperterm_printf("   ^^    ^^\n\r");
+        hyperterm_printf("Type your name (Enter accept, Escape Start over\n\r");
+        lcd_printString("abcdefg");
+        i = 0;
+        firstTime = 0;
+      }
+      
+      // Grab user input for name, one character at a time
+      KEYBUF = hyperterm_getchar();
+
+      // Interpret user input
+      if(KEYBUF == 0x20){        // User presses enter => move on
+        hyperterm_printf("\rRecorded Name: %s\n\n\r", THIS_PLAYER_NAME);
+        STATE = HOST_OR_JOIN;
+        firstTime = 1;
+      }
+
+      if(KEYBUF == 0x1b){        // User presses escape => reset
+        STATE = PRINT_INIT;
+        firstTime = 1;
+      }
+
+
+      // Otherwise, record user name
+      if(i == 20)
+           hyperterm_printf("Exceeded max name Length![enter to procees, esc to change\n\r");
+      
+      else
+           THIS_PLAYER_NAME[i++] = KEYBUF;
+    break;
+
+     
+//STATE: HOST_OR_JOIN---------------------------------------------
+//-------User prompt to be a game host or join a received beacon
+    case HOST_OR_JOIN:
+       if(firstTime){
+            hyperterm_printf("Do you want to host (h) or join (j)? ");
+            firstTime = 0;
+       }
+
+      // Grab user input and interpret it
+      KEYBUF = hyperterm_getchar();
+      switch(KEYBUF){
+        case 0x68:
+        case 0x48:
+             STATE = SEND_HOST_BEACON;
+             firstTime = 1;
+        break;
+
+        case 0x4a:
+        case 0x6a:
+             STATE = LISTEN_FOR_BEACON;
+             firstTime = 1;
+        break;
+        default:
+          hyperterm_printf("Invalid selection!\n\r\n");
+          firstTime = 1;
+      }
+    break;
+
+
+//STATE:  SEND_HOST_BEACON---------------------------------------------
+//-------Selects a random time and send beacons at random intervals
+    case SEND_HOST_BEACON:
+
+      // Select random interval
+      if(firstTime){
+            INTERVAL = 32000 + timer_get_ticks();
+            firstTime = 0;
+      }
+ 
+      // Send beacon (to be implemented)
+      sendBeacon();
+
+      // Wait interval
+      timer_wait(INTERVAL);
+
+
+      // Look for response => Function returns 1 if new packet received
+      if(readRxBuf()){
+//TODO => Update other players info        
+
+        STATE = DO_YOU_ACCEPT;
+        firstTime = 1;
+      }
+      
+    break;
+
+
+
+//STATE:  DO_YOU_ACCEPT---------------------------------------------
+//-------Prompt if user accepts client
+    case DO_YOU_ACCEPT:
+         if(firstTime){
+          hyperterm_printf("Received answer from user %s\n\rAccept game (y/n): ", OTHER_PLAYER_NAME);
+          firstTime = 0;
+         }
+      // Grab user input and interpret it (y/n)
+      KEYBUF = hyperterm_getchar();
+      switch(KEYBUF){
+        case 0x59:
+        case 0x79:
+             STATE = SET_UP_HEARTBEATS;
+        break;
+
+        case 0x4e:
+        case 0x6e:
+             hyperterm_printf("Refusing host; going back to broadcasting (esc to quit)\n\r\n");
+             STATE = SEND_HOST_BEACON;
+        break;
+        default:
+          hyperterm_printf("Invalid selection!\n\r\n");
+          firstTime = 1;
+      }
+
+    break;
+	
+                        
+//STATE:  SET_UP_HEARTBEATS---------------------------------------------
+//-------Sets up the heartbeats and proceed to start game
+
+    case SET_UP_HEARTBEATS:
+
+
+    break;
+
+
+
+//STATE:  LISTEN_FOR_BEACON---------------------------------------------
+//-------Listens for a beacon and displays it on the screen
+    case LISTEN_FOR_BEACON:
+
+
+    break;
+
+
+
+//STATE:  ACCEPT_BEACON---------------------------------------------
+//-------User accepts a beacon - send ACK packet
+    case ACCEPT_BEACON:
+
+
+    break;
+
+
+
+//STATE:  WAIT_HOST_HB---------------------------------------------
+//-------Wait to receive host heartbeats and go to start game
+    case WAIT_HOST_HB:
+
+
+    break;
+
+
+
+
+
+
+
+
+
+
+    // Reset buffers and prompt user to enter number
+    case INIT_BOARD:
+      resetKeyBuf();
+      hyperterm_printf("Type your 4 digit secret number [Enter when done]\n\r");
+      STATE = SET_NUMBER;
+    break;
+			
+    // Wait for user to press enter, record secret number input
+    case SET_NUMBER:
+      // Comment following line out; interrupt flag to be implemented
+      KEYPRESSED = 1;
+      // If a key is pressed, record it and update LCD to reflect changes
+      if(KEYPRESSED){
+        KEY[4] = hyperterm_getchar();
+				
+      if(KEY[4] == 13){
+          STATE = GRAB_INPUT;
+          hyperterm_printf("Your secret number is: %d%d%d%d\n\r", NUMBER[0], NUMBER[1], NUMBER[2], NUMBER[3]);
+          hyperterm_printf("Type guess for other player's number[Enter to send]\n\r");
+          break;
+      }
+				
+        if(KEY[4] > 0x39 || KEY[4] < 0x30){
+          hyperterm_printf("Invalid key entered [%d]! Must be in the range [0-9]\n\r", KEY[4]);
+          break;
+        }
+	
+        KEY[0] = KEY[1];
+        KEY[1] = KEY[2];
+        KEY[2] = KEY[3];
+        KEY[3] = KEY[4];
+				
+        // Print the number on the LCD
+	hyperterm_printf("\r");
+        for(i = 0; i < 4; i++){
+          NUMBER[i] = KEY[i]-0x30;
+          hyperterm_printf("%d", KEY[i]-0x30);
+	}
+	hyperterm_printf("\r");
+      }
+      break;
+	
+                        
+      // Grab user input a when presses 'Enter', send data	
+    case GRAB_INPUT:
+    // FOLLOIWING FEW LINES TO BE DELETED
+    if(!KEYPRESSED){
+      KEYPRESSED = 1;
+    }
+    KEYPRESSED = 1;
+		
+    // Poll the Rx Buffer to see if new data has arrived
+    readRx();
+		
+    if(KEYPRESSED){
+      KEY[4] = hyperterm_getchar();
+				
+      if(KEY[4] == 13){
+	STATE = SEND_DATA;
+        KEYPRESSED = 0;
+	break;
+      }
+				
+      if(KEY[4] > 0x39 || KEY[4] < 0x30){
+	hyperterm_printf("Invalid key entered [%d]! Must be in the range [0-9]\n\r", KEY[4]);
+	break;
+      }
+	
+      KEY[0] = KEY[1];
+      KEY[1] = KEY[2];
+      KEY[2] = KEY[3];
+      KEY[3] = KEY[4];
+	
+      hyperterm_printf("\r");
+      for(i = 0; i < 4; i++){
+        hyperterm_printf("%d", KEY[i]-0x30);
+      }
+      hyperterm_printf("\r");
+      
+				
+      }		
+		
+    break;
+		
+      // Send number guess via WIFI (currently implemented as a loopback) 	
+    case SEND_DATA:
+
+      // First convert ASCII to integer
+      // Also implemented here is loopback => TO BE DELETED
+      for(i=0; i<4; i++){
+        KEY[i] -= 0x30;
+        RECEIVED[i] = KEY[i];
+      }
+
+      // Send data to Rx
+      hyperterm_printf("Sending: %d%d%d%d\n\r", KEY[0], KEY[1], KEY[2], KEY[3]);
+      NEWPACKET = 1;
+      STATE = GRAB_INPUT;
+      resetKeyBuf();
+      KEYPRESSED = 0;
+    break;
+			
+		
+		
+  
+    default: 
+      STATE = INIT_BOARD;
+     }
+    }       
+}
+

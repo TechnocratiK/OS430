@@ -1,0 +1,134 @@
+<!DOCTYPE CrossStudio_Project_File>
+<solution version="1" Name="OS430" >
+  <project Name="OS430" >
+    <configuration Target="MSP430F149" linker_memory_map_file="$(StudioDir)/targets/MSP430F149.xml" project_directory="" project_type="Executable" Name="Common" c_system_include_directories="$(StudioDir)/include;$(ProjectDir)" build_use_hardware_multiplier="Yes" />
+    <folder Name="Source Files" >
+      <configuration filter="s;asm;inc;s43" Name="Common" />
+      <folder Name="include" >
+        <configuration filter="" Name="Common" />
+        <file file_name="include/defaults.h" Name="defaults.h" />
+      </folder>
+      <folder Name="scheduler" >
+        <configuration filter="" Name="Common" />
+        <file file_name="scheduler/initializeScheduler.s43" Name="initializeScheduler.s43" />
+        <file file_name="scheduler/schedulerData.s43" Name="schedulerData.s43" />
+        <file file_name="scheduler/schedulerInterrupt.s43" Name="schedulerInterrupt.s43" />
+        <file file_name="scheduler/schedulerQueueInsert.s43" Name="schedulerQueueInsert.s43" />
+        <file file_name="scheduler/schedulerQueuePop.s43" Name="schedulerQueuePop.s43" />
+        <file file_name="scheduler/startThread.s43" Name="startThread.s43" />
+        <file file_name="scheduler/stopThread.s43" Name="stopThread.s43" />
+        <file file_name="scheduler/yieldThread.s43" Name="yieldThread.s43" />
+        <file file_name="scheduler/scheduler.h" Name="scheduler.h" />
+        <file file_name="scheduler/thread.h" Name="thread.h" />
+        <file file_name="scheduler/schedulerTime.s43" Name="schedulerTime.s43" />
+        <file file_name="scheduler/sleepThread.c" Name="sleepThread.c" />
+        <file file_name="scheduler/timerInterrupt.s43" Name="timerInterrupt.s43" />
+        <file file_name="scheduler/pause.s43" Name="pause.s43" />
+      </folder>
+      <folder Name="memory" >
+        <configuration filter="" Name="Common" />
+        <file file_name="memory/allocateMemory.s43" Name="allocateMemory.s43" />
+        <file file_name="memory/freeMemory.s43" Name="freeMemory.s43" />
+        <file file_name="memory/initializeMemory.s43" Name="initializeMemory.s43" />
+        <file file_name="memory/memory.h" Name="memory.h" />
+      </folder>
+      <folder Name="utility" >
+        <configuration filter="" Name="Common" />
+        <file file_name="utility/arithmetcShiftWordRight .s43" Name="arithmetcShiftWordRight .s43" />
+        <file file_name="utility/arithmeticShiftByteRight.s43" Name="arithmeticShiftByteRight.s43" />
+        <file file_name="utility/logicalShiftByteLeft.s43" Name="logicalShiftByteLeft.s43" />
+        <file file_name="utility/logicalShiftByteRight.s43" Name="logicalShiftByteRight.s43" />
+        <file file_name="utility/logicalShiftWordLeft.s43" Name="logicalShiftWordLeft.s43" />
+        <file file_name="utility/logicalShiftWordRight.s43" Name="logicalShiftWordRight.s43" />
+        <file file_name="utility/rotateByteLeft.s43" Name="rotateByteLeft.s43" />
+        <file file_name="utility/rotateByteRight.s43" Name="rotateByteRight.s43" />
+        <file file_name="utility/rotateWordLeft.s43" Name="rotateWordLeft.s43" />
+        <file file_name="utility/rotateWordRight.s43" Name="rotateWordRight.s43" />
+        <file file_name="utility/assemblyMacros.h" Name="assemblyMacros.h" />
+        <file file_name="utility/storeAndDisableInterrupts.s43" Name="storeAndDisableInterrupts.s43" />
+        <file file_name="utility/restoreInterrupts.s43" Name="restoreInterrupts.s43" />
+        <file file_name="utility/utility.h" Name="utility.h" />
+      </folder>
+      <folder Name="pipes" >
+        <configuration filter="" Name="Common" />
+        <file file_name="pipes/pipes.c" Name="pipes.c" />
+        <file file_name="pipes/pipes.h" Name="pipes.h" />
+      </folder>
+      <file file_name="config.h" Name="config.h" />
+      <file file_name="flags.txt" Name="flags.txt" />
+      <file file_name="init.s43" Name="init.s43" />
+      <file file_name="main.c" Name="main.c" />
+      <folder Name="terminal" >
+        <configuration filter="" Name="Common" />
+        <file file_name="terminal/terminal.c" Name="terminal.c" />
+        <file file_name="terminal/terminal.h" Name="terminal.h" />
+      </folder>
+      <folder Name="testing" >
+        <configuration filter="" Name="Common" />
+        <file file_name="testing/testing.c" Name="testing.c" />
+        <file file_name="testing/testing.h" Name="testing.h" />
+      </folder>
+      <folder Name="counter" >
+        <configuration filter="" Name="Common" />
+        <file file_name="counter/counter.h" Name="counter.h" />
+        <file file_name="counter/counter.c" Name="counter.c" />
+      </folder>
+      <folder Name="spi" >
+        <configuration filter="" Name="Common" />
+        <file file_name="spi/spi.h" Name="spi.h" />
+        <file file_name="spi/spi.c" Name="spi.c" />
+      </folder>
+      <folder Name="rtc" >
+        <configuration filter="" Name="Common" />
+        <file file_name="rtc/rtc.c" Name="rtc.c" />
+        <file file_name="rtc/rtc.h" Name="rtc.h" />
+      </folder>
+      <folder Name="cc2500" >
+        <configuration filter="" Name="Common" />
+        <file file_name="cc2500/cc2500.c" Name="cc2500.c" />
+        <file file_name="cc2500/cc2500.h" Name="cc2500.h" />
+      </folder>
+      <folder Name="mutex" >
+        <configuration filter="" Name="Common" />
+        <file file_name="mutex/mutex.c" Name="mutex.c" />
+        <file file_name="mutex/mutex.h" Name="mutex.h" />
+      </folder>
+      <folder Name="flash" >
+        <configuration filter="" Name="Common" />
+        <file file_name="flash/flash.h" Name="flash.h" />
+        <file file_name="flash/flash.s43" Name="flash.s43" />
+      </folder>
+      <folder Name="temperature" >
+        <configuration filter="" Name="Common" />
+        <file file_name="temperature/temperature.c" Name="temperature.c" />
+        <file file_name="temperature/temperature.h" Name="temperature.h" />
+      </folder>
+      <folder Name="chat" >
+        <configuration filter="" Name="Common" />
+        <file file_name="chat/chat.c" Name="chat.c" />
+        <file file_name="chat/message.c" Name="message.c" />
+        <file file_name="chat/message.h" Name="message.h" />
+        <file file_name="chat/chat.h" Name="chat.h" />
+      </folder>
+      <folder Name="menu" >
+        <configuration filter="" Name="Common" />
+        <file file_name="menu/menu.c" Name="menu.c" />
+        <file file_name="menu/menu.h" Name="menu.h" />
+      </folder>
+      <folder Name="lcd" >
+        <configuration filter="" Name="Common" />
+        <file file_name="lcd/lcd.c" Name="lcd.c" />
+        <file file_name="lcd/lcd.h" Name="lcd.h" />
+      </folder>
+    </folder>
+    <folder Name="System Files" >
+      <configuration filter="xml" Name="Common" />
+      <file file_name="$(StudioDir)/targets/section_placement.xml" Name="section_placement.xml" >
+        <configuration Name="Common" file_type="Section Placement" />
+      </file>
+    </folder>
+  </project>
+  <configuration link_include_standard_libraries="Yes" build_debug_information="Yes" Name="Debug" />
+  <configuration optimize_jump_chaining="Yes" optimize_block_locality="Yes" optimize_tail_merging="Yes" c_preprocessor_definitions="NDEBUG" optimize_cross_calling="Standard" build_debug_information="No" optimize_jump_threading="Yes" Name="Release" optimize_dead_code="Yes" optimize_cross_jumping="Yes" optimize_copy_propagation="Yes" />
+  <configuration link_include_standard_libraries="Yes" Name="Common" c_system_include_directories="$(StudioDir)/include" linker_heap_size="" />
+</solution>

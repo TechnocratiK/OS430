@@ -1,0 +1,76 @@
+|McGumps
+msp430Port1Pin7 => ~NO_FANOUT~
+msp430Port1Pin6 => ~NO_FANOUT~
+msp430Port1Pin5 => ~NO_FANOUT~
+msp430Port1Pin4 => ~NO_FANOUT~
+msp430Port1Pin3 => ~NO_FANOUT~
+msp430Port1Pin2 => ~NO_FANOUT~
+msp430Port1Pin1 => ~NO_FANOUT~
+msp430Port1Pin0 => ~NO_FANOUT~
+msp430Port2Pin7 => ~NO_FANOUT~
+msp430Port2Pin6 => ~NO_FANOUT~
+msp430Port2Pin5 => ~NO_FANOUT~
+msp430Port2Pin4 => ~NO_FANOUT~
+msp430Port2Pin3 => ~NO_FANOUT~
+msp430Port2Pin2 => ~NO_FANOUT~
+msp430Port2Pin1 => ~NO_FANOUT~
+msp430Port2Pin0 => ~NO_FANOUT~
+msp430Port4Pin7 => ~NO_FANOUT~
+msp430Port4Pin6 => ~NO_FANOUT~
+msp430Port4Pin5 => ~NO_FANOUT~
+msp430Port4Pin4 => ~NO_FANOUT~
+msp430Port4Pin3 => ~NO_FANOUT~
+msp430Port4Pin2 => ~NO_FANOUT~
+msp430Port4Pin1 => ~NO_FANOUT~
+msp430Port4Pin0 => ~NO_FANOUT~
+msp430Port5Pin7 => ~NO_FANOUT~
+msp430Port5Pin6 => ~NO_FANOUT~
+msp430Port5Pin5 => ~NO_FANOUT~
+msp430Port5Pin4 => ~NO_FANOUT~
+msp430Port5Pin3 => SPIPassthrough:spiPT.msp_uclk
+msp430Port5Pin2 <= SPIPassthrough:spiPT.msp_somi
+msp430Port5Pin1 => SPIPassthrough:spiPT.msp_simo
+msp430Port5Pin0 => SPIPassthrough:spiPT.msp_ste
+h1Pin4 <= comb.DB_MAX_OUTPUT_PORT_TYPE
+h1Pin5 <= comb.DB_MAX_OUTPUT_PORT_TYPE
+h1Pin6 <= comb.DB_MAX_OUTPUT_PORT_TYPE
+h1Pin7 <= comb.DB_MAX_OUTPUT_PORT_TYPE
+h1Pin8 <= comb.DB_MAX_OUTPUT_PORT_TYPE
+h1Pin9 <= comb.DB_MAX_OUTPUT_PORT_TYPE
+h1Pin10 <= comb.DB_MAX_OUTPUT_PORT_TYPE
+h1Pin12 <= comb.DB_MAX_OUTPUT_PORT_TYPE
+h1Pin14 <= comb.DB_MAX_OUTPUT_PORT_TYPE
+h1Pin16 <= comb.DB_MAX_OUTPUT_PORT_TYPE
+h1Pin18 <= comb.DB_MAX_OUTPUT_PORT_TYPE
+h1Pin24 <= SPIPassthrough:spiPT.slave_uclk
+h1Pin26 <= SPIPassthrough:spiPT.slave_ste
+h1Pin28 <= comb.DB_MAX_OUTPUT_PORT_TYPE
+h1Pin30 => SPIPassthrough:spiPT.slave_somi
+h1Pin32 <= comb.DB_MAX_OUTPUT_PORT_TYPE
+h1Pin34 <= SPIPassthrough:spiPT.slave_simo
+h1Pin36 <= comb.DB_MAX_OUTPUT_PORT_TYPE
+ssdSegments[0] <= <GND>
+ssdSegments[1] <= <GND>
+ssdSegments[2] <= <GND>
+ssdSegments[3] <= <GND>
+ssdSegments[4] <= <GND>
+ssdSegments[5] <= <GND>
+ssdSegments[6] <= <GND>
+ssdSegments[7] <= <VCC>
+ssdLeftEnable <= comb.DB_MAX_OUTPUT_PORT_TYPE
+ssdRightEnable <= comb.DB_MAX_OUTPUT_PORT_TYPE
+clockEnable <= <VCC>
+clk => ~NO_FANOUT~
+
+
+|McGumps|SPIPassthrough:spiPT
+msp_somi <= slave_somi.DB_MAX_OUTPUT_PORT_TYPE
+msp_simo => slave_simo.DATAIN
+msp_uclk => slave_uclk.DATAIN
+msp_ste => slave_ste.DATAIN
+slave_somi => msp_somi.DATAIN
+slave_simo <= msp_simo.DB_MAX_OUTPUT_PORT_TYPE
+slave_uclk <= msp_uclk.DB_MAX_OUTPUT_PORT_TYPE
+slave_ste <= msp_ste.DB_MAX_OUTPUT_PORT_TYPE
+
+

@@ -1,0 +1,52 @@
+#include <msp430x14x.h>
+#include "config.h"
+  ; create the data and bss sections, allocating the dynamic heap
+  .data
+  .bss
+  align   WORD
+_memorySpace::   ds MEMORY_TOTAL_SIZE
+
+  .code
+reset:
+  mov.w #(RAM_Start_Address + RAM_Size), sp
+  mov.w #WDTPW + WDTHOLD, &WDTCTL   // Stop watchdog.
+
+  ; copy data from the IDATA0 section to the appropriate location
+  mov.w   #SFB(IDATA0), r15
+  mov.w   #idata0_start, r14
+  mov.w   #(idata0_end - idata0_start), r13
+  call    #_memcpy
+
+  ; initialize memory (allows for allocation)
+  call #_initializeMemory
+
+  ; initialize the scheduler (allows for multitasking)
+  call #_initializeScheduler
+
+  ; initialize mutexes (allows for mutual exclusion of threads)
+  call #_initializeMutexes
+
+  ; initialize flash
+  call #_initializeFlash
+
+  ; call main()
+  call #_main
+
+  ; on failure, reset
+  jmp reset
+
+  .vectors
+  .keep
+  org     RESET_VECTOR
+  dw      reset
+
+  org     TIMERA0_VECTOR
+  dw      _schedulerInterrupt
+
+  org     TIMERA1_VECTOR
+  dw      _timerInterrupt
+
+  .const
+idata0_start:
+  .init   "IDATA0"
+idata0_end:

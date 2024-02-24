@@ -1,0 +1,29 @@
+  PUBLIC _arithmeticShiftWordRight
+  RSEG CODE
+
+_arithmeticShiftWordRight:
+  ; check for the bounds of r14
+  cmp.w   #0x0010, r14
+  jnc _arithmeticShiftWordRight_loop
+    ; r14 is out of range, return its top bit, repeated
+    rla.w   r15
+    mov.w   #0xffff, r15
+    adc.w   r15
+    inv.w   r15
+  ret
+
+_arithmeticShiftWordRight_loop:
+    ; test for the loop's end
+    tst.b   r14
+  jz _arithmeticShiftWordRight_loop_end
+
+    ; shift the word
+    rra.w   r15
+
+    ; decrement the loop counter and loop
+    dec.b   r14
+  jmp _arithmeticShiftWordRight_loop
+_arithmeticShiftWordRight_loop_end:
+
+  ; return
+  ret

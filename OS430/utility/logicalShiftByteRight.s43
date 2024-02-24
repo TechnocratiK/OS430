@@ -1,0 +1,27 @@
+  PUBLIC _logicalShiftByteRight
+  RSEG CODE
+
+_logicalShiftByteRight:
+  ; check for the bounds of r14
+  cmp.w   #0x0008, r14
+  jnc _logicalShiftByteRight_loop
+    ; r14 is out of range, return 0
+    clr.b   r15
+  ret
+
+_logicalShiftByteRight_loop:
+    ; test for the loop's end
+    tst.b   r14
+  jz _logicalShiftByteRight_loop_end
+
+    ; shift the byte
+    rra.b   r15
+    and.b   #0x7f, r15
+
+    ; decrement the loop counter and loop
+    dec.b   r14
+  jmp _logicalShiftByteRight_loop
+_logicalShiftByteRight_loop_end:
+
+  ; return
+  ret

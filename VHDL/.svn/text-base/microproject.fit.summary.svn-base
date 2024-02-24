@@ -1,0 +1,9 @@
+Fitter Status : Successful - Wed Dec 01 02:41:47 2010
+Quartus II Version : 10.0 Build 218 06/27/2010 SJ Full Version
+Revision Name : microproject
+Top-level Entity Name : microproject
+Family : MAX7000AE
+Device : EPM7128AELC84-10
+Timing Models : Final
+Total macrocells : 44 / 128 ( 34 % )
+Total pins : 33 / 68 ( 49 % )

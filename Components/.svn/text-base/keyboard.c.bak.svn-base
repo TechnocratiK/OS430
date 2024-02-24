@@ -1,0 +1,68 @@
+
+#include "keyboard.h"
+#include "common.h"
+#include "uart.h"
+#include "hyperterm.h"
+
+#define PORT2_KEYBOARD_INTERRUPT 0x01
+#define PORT5_SPI_REDIRECT 0x40
+
+#define KEYBOARD_SPI_PORT (USE_UART1 | USE_SPI)
+
+int keyboard_waiting = FALSE;
+
+
+void keyboard_init(void) {
+
+  uart_switch(KEYBOARD_SPI_PORT);
+  uart_init();
+
+  P5DIR |= PORT5_SPI_REDIRECT;
+  P5OUT &= ~PORT5_SPI_REDIRECT; // Set standard to receiver
+  
+  P2DIR &= ~PORT2_KEYBOARD_INTERRUPT; // input port
+  P2IE 	&= ~PORT2_KEYBOARD_INTERRUPT;	//disable interrupts for now
+  P2IES &= ~PORT2_KEYBOARD_INTERRUPT; 	//Set Low to High interrupts
+}
+
+char keyboard_getchar(void){
+  int key = 0x00;
+  int data[3];
+  
+  //debug_putchar('c');
+
+  keyboard_waiting = TRUE;
+  P2IE 	|= PORT2_KEYBOARD_INTERRUPT;
+  _BIS_SR(CPUOFF);
+  P2IE 	&= ~PORT2_KEYBOARD_INTERRUPT;
+
+  P5OUT |= PORT5_SPI_REDIRECT;
+  
+  uart_switch(KEYBOARD_SPI_PORT);
+
+    data[0] = uart_spi_byte(0x00, SPI_SINGLE_TRANS);
+
+    data[0] = uart_spi_byte(0xAA, SPI_START_TRANS);
+    data[1] = uart_spi_byte(0xAA, SPI_CONT_TRANS);
+    data[2] = uart_spi_byte(0xAA, SPI_END_TRANS);
+    
+    hyperterm_printf("%2X %2X %2X\r\n", data[0], data[1], data[2]);
+  
+  keyboard_waiting = FALSE;
+  P5OUT &= ~PORT5_SPI_REDIRECT;
+  return key;
+}
+
+
+
+void port2_irq(void) __interrupt[PORT2_VECTOR] {
+  P2IFG = 0x0;                      //clearing the interrupt flag
+  
+  hyperterm_printf("Int: ");
+  //debug_printf("INT");
+
+  if(keyboard_waiting) {
+    _BIC_SR_IRQ(CPUOFF);
+  }
+}
+

@@ -1,0 +1,100 @@
+#include "utility/assemblyMacros.h"
+#include "config.h"
+
+  .code
+; void freeMemory(void *start, unsigned int size)
+_freeMemory::
+  ; store a copy of the arguments and GIE on the stack
+  push.w  r14
+  push.w  r15
+  sub.w   #0x02, sp
+
+  ; disable interrupts
+  mov.w   sp, r15
+  call #_storeAndDisableInterrupts
+  mov.w   2(sp), r15
+  mov.w   4(sp), r14
+
+  ; round the start up to the nearest (1 << MEMORY_GRANULARITY)
+  add.w   #((1 << MEMORY_GRANULARITY) - 1), r15
+  bic.w   #((1 << MEMORY_GRANULARITY) - 1), r15
+
+  ; round the size down to the nearest (1 << MEMORY_GRANULARITY), capping it to
+  ; the end of memory space
+  add.w   r15, r14
+  bic.w   #((1 << MEMORY_GRANULARITY) - 1), r14
+  cmp.w   #MEMORY_HEAP_END, r14
+  jnc _freeMemory_no_size_cap
+    
+    ; the size is too large; cap it
+    mov.w   #MEMORY_HEAP_END, r14
+_freeMemory_no_size_cap:
+
+  sub.w   r15, r14
+  jz _freeMemory_end
+
+  ; determine the offset into the bitmap
+  sub.w   #MEMORY_HEAP_START, r15
+  LOGICAL_SHIFT_WORD_RIGHT r15, MEMORY_GRANULARITY
+
+  ; store the start and size on the stack
+  push.w  r15
+  push.w  r14
+
+  ; extract the bitmap bit offset and shift 0x0001 appropriately
+  mov.w   r15, r14
+  mov.w   #0x0001, r15
+  call #_rotateWordLeft
+
+  ; restore the start and size from the stack
+  pop.w   r14
+  pop.w   r13
+
+  ; shift the bitmap offset right and add the bitmap start address to it
+  rra.w   r13
+  rra.w   r13
+  rra.w   r13
+  and.w   #0x1ffe, r13
+  add.w   #MEMORY_MAP_START, r13
+
+  ; loop, freeing memory
+
+  ; Register        Description
+  ; r15             Current bitmap bit
+  ; r14             Size remaining
+  ; r13             Next bitmap word address
+  ; r12             Current bitmap word
+  mov.w   @r13+, r12
+_freeMemory_loop:
+    ; clear the bit
+    bic.w   r15, r12
+
+    ; rotate r15 and check to see if a new bitmap word is required
+    rla.w   r15
+    jnc _freeMemory_loop_no_write
+
+      ; reload r15
+      mov.w   #0x0001, r15
+
+      ; write r12 to the bitmap
+      mov.w   r12, -2(r13)
+
+      ; read a new value of r12 from the bitmap
+      mov.w   @r13+, r12
+_freeMemory_loop_no_write:
+
+    ; update the size remaining and loop
+    sub.w   #(1 << MEMORY_GRANULARITY), r14
+  jnz _freeMemory_loop
+
+  ; write r12 to the bitmap
+  mov.w   r12, -2(r13)
+
+_freeMemory_end:
+  ; restore interrupts
+  mov.w   sp, r15
+  call #_restoreInterrupts
+
+  ; return
+  add.w   #0x06, sp
+  ret

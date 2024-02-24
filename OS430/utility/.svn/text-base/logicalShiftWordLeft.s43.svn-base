@@ -1,0 +1,26 @@
+  PUBLIC _logicalShiftWordLeft
+  RSEG CODE
+
+_logicalShiftWordLeft:
+  ; check for the bounds of r14
+  cmp.w   #0x0010, r14
+  jnc _logicalShiftWordLeft_loop
+    ; r14 is out of range, return 0
+    clr.w   r15
+  ret
+
+_logicalShiftWordLeft_loop:
+    ; test for the loop's end
+    tst.b   r14
+  jz _logicalShiftWordLeft_loop_end
+
+    ; shift the word
+    rla.w   r15
+
+    ; decrement the loop counter and loop
+    dec.b   r14
+  jmp _logicalShiftWordLeft_loop
+_logicalShiftWordLeft_loop_end:
+
+  ; return
+  ret

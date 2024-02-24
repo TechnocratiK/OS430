@@ -1,0 +1,11 @@
+
+
+#ifndef __INCLUDED_KEYBOARD_H
+#define __INCLUDED_KEYBOARD_H
+
+void keyboard_init();
+char keyboard_getchar();
+
+
+
+#endif

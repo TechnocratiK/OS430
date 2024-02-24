@@ -1,0 +1,30 @@
+#include <msp430x14x.h>
+  .code
+_pause::
+  ; disable the scheduler
+  ;bic.w   #CCIE, TACCTL0
+
+  ; add TAR into r15
+  ;add.w   TAR, r15
+
+  ; set the timer
+  ;mov.w   r15, TACCR2
+  
+  ; enable the timer
+  ;bis.w   #CCIE, TACCTL2
+
+  ; shut off the CPU, waiting for the interrupt
+  ;bis.w   #CPUOFF, SR
+
+  ; disable the timer
+  ;bic.w   #CCIE, TACCTL2
+
+  ; enable the scheduler
+  ;bis.w   CCIE, TACCTL0
+
+  ; loop
+  sub.w   #0x04, r15
+  nop
+  jc _pause
+
+  ret

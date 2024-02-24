@@ -1,0 +1,142 @@
+#include "config.h"
+
+  PUBLIC _allocateMemory
+  RSEG CODE
+
+_allocateMemory:
+  ; store r10 and r11 on the stack, as well as a copy of GIE
+  push.w  r10
+  push.w  r11
+  sub.w   #0x02, sp
+
+  ; disable interrupts
+  push.w  r15
+  mov.w   sp, r15
+  add.w   #0x02, r15
+  call #_storeAndDisableInterrupts
+  pop.w   r15
+
+  ; if the size specified is zero, return with a failure
+  tst.w   r15
+  jz _allocateMemory_fail
+    
+  ; if the size specified is greater than the heap, return with a failure
+  cmp.w   #(MEMORY_HEAP_SIZE + 1), r15
+  jc _allocateMemory_fail
+
+  ; round the size up to the nearest (1 << MEMORY_GRANULARITY)
+  add.w   #((1 << MEMORY_GRANULARITY) - 1), r15
+  bic.w   #((1 << MEMORY_GRANULARITY) - 1), r15
+
+  ;
+  ; perform a search for the needed memory
+  ;
+
+  ; Register        Description
+  ; r15             Total size
+  ; r14             Size remaining
+  ; r13             Current bitmap address
+  ; r12             Current bitmap word
+  ; r11             Current bitmap test bit
+  ; r10             Current address
+
+  ; initialize the registers
+  mov.w   r15, r14
+  mov.w   #MEMORY_MAP_START, r13
+  mov.w   #0x8000, r11
+  mov.w   #MEMORY_HEAP_START, r10
+_allocateMemory_search:
+    ; if the current address is equal to the end of memory, abort
+    cmp.w   #MEMORY_MAP_END, r10
+  jc _allocateMemory_fail
+
+    ; rotate the bitmap word and check if a new one needs to be loaded
+    rla.w   r11
+  jnc _allocateMemory_search_no_read
+
+      ; reload r11
+      mov.w   #0x0001, r11
+
+      ; load a word from the bitmap
+      mov.w   @r13+, r12
+_allocateMemory_search_no_read:
+
+    ; test the current bitmap word bit
+    bit.w   r11, r12
+  jz _allocateMemory_search_no_restart
+
+    ; update the current address and size and continue searching
+    add.w   #(1 << MEMORY_GRANULARITY), r10
+    mov.w   r15, r14
+  jmp _allocateMemory_search
+_allocateMemory_search_no_restart:
+
+    ; update the current address and size remaining and loop if necessary
+    add.w   #(1 << MEMORY_GRANULARITY), r10
+    sub.w   #(1 << MEMORY_GRANULARITY), r14
+  jnz _allocateMemory_search
+_allocateMemory_search_end:
+
+
+  ;
+  ; allocate the needed memory
+  ;
+
+_allocateMemory_allocate:
+    ; set the bit
+    bis.w   r11, r12
+
+    ; rotate the bitmap bit and check for write back
+    clrc
+    rrc.w   r11
+    jnc _allocateMemory_allocate_no_write
+      ; reload r11
+      rrc.w   r11
+
+      ; write the word back to the bitmap
+      sub.w   #0x0002, r13
+      mov.w   r12, 0(r13)
+
+      ; read a new word
+      mov.w   -2(r13), r12
+_allocateMemory_allocate_no_write:
+
+    ; decrease the address and size and loop as needed
+    sub.w   #(1 << MEMORY_GRANULARITY), r10
+    sub.w   #(1 << MEMORY_GRANULARITY), r15
+  jnz _allocateMemory_allocate
+
+  ; write back the word
+  mov.w   r12, -2(r13)
+
+  ; return the address
+  mov.w   r10, r15
+
+_allocateMemory_end:
+  ; restore interrupts
+  push.w  r15
+  mov.w   sp, r15
+  add.w   #0x02, r15
+  call #_restoreInterrupts
+  pop.w   r15
+
+  ; return
+  add.w   #0x02, sp
+  pop.w   r11
+  pop.w   r10
+  ret
+
+_allocateMemory_fail:
+  ; restore interrupts
+  push.w  r15
+  mov.w   sp, r15
+  add.w   #0x02, r15
+  call #_restoreInterrupts
+  pop.w   r15
+
+  ; return with failure
+  clr.w   r15
+  add.w   #0x02, sp
+  pop.w   r11
+  pop.w   r10
+  ret

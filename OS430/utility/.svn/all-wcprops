@@ -1,0 +1,89 @@
+K 25
+svn:wc:ra_dav:version-url
+V 30
+/svn/!svn/ver/17/OS430/utility
+END
+logicalShiftWordLeft.s43
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/5/OS430/utility/logicalShiftWordLeft.s43
+END
+rotateByteRight.s43
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/5/OS430/utility/rotateByteRight.s43
+END
+utility.h
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/!svn/ver/7/OS430/utility/utility.h
+END
+assemblyMacros.h
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/5/OS430/utility/assemblyMacros.h
+END
+logicalShiftWordRight.s43
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/5/OS430/utility/logicalShiftWordRight.s43
+END
+restoreInterrupts.s43
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/7/OS430/utility/restoreInterrupts.s43
+END
+storeAndDisableInterrupts.s43
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/7/OS430/utility/storeAndDisableInterrupts.s43
+END
+rotateWordLeft.s43
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/5/OS430/utility/rotateWordLeft.s43
+END
+logicalShiftByteLeft.s43
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/5/OS430/utility/logicalShiftByteLeft.s43
+END
+rotateWordRight.s43
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/5/OS430/utility/rotateWordRight.s43
+END
+arithmetcShiftWordRight .s43
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/5/OS430/utility/arithmetcShiftWordRight%20.s43
+END
+arithmeticShiftByteRight.s43
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/5/OS430/utility/arithmeticShiftByteRight.s43
+END
+logicalShiftByteRight.s43
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/5/OS430/utility/logicalShiftByteRight.s43
+END
+rotateByteLeft.s43
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/5/OS430/utility/rotateByteLeft.s43
+END

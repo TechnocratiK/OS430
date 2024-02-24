@@ -1,0 +1,133 @@
+
+SYMBOLS BY NAME
+
+     800            RAM_Size            
+     200            RAM_Start_Address   
+     200 IDATA0     ___begin_IDATA0     
+       0            ___begin_UDATA0     
+       0            ___end_UDATA0       
+    26eb CONST      ___hex_lc           
+    26db CONST      ___hex_uc           
+    21f0 CODE       ___int16_mul        
+    2204 CODE       ___uint16_div       
+    221c CODE       ___uint16_mod       
+    1d5a CODE       ___vfprintf         
+    1100 CODE       _cc2500_init        
+    1324 CODE       _cc2500_read_reg    
+    1376 CODE       _cc2500_reg_get_name
+    1126 CODE       _cc2500_reset       
+    1176 CODE       _cc2500_setradioregisters
+    131e CODE       _cc2500_status      
+     2f4 IDATA0     _cc2500_status_byte 
+    13b8 CODE       _cc2500_transmit_packet
+    134c CODE       _cc2500_write_reg   
+    1676 CODE       _convInt            
+    16dc CODE       _dump_registers     
+    1696 CODE       _getHex             
+     2f6 IDATA0     _hyperterm_echo     
+    1460 CODE       _hyperterm_getchar  
+    1440 CODE       _hyperterm_init     
+    1480 CODE       _hyperterm_printf   
+    144c CODE       _hyperterm_putchar  
+     302 IDATA0     _keyboard_waiting   
+    1674 CODE       _keypad_disable_interrupts
+    1632 CODE       _keypad_pressed     
+    165e CODE       _keypad_timerA_wakeup
+    1b88 CODE       _lcd_init           
+    1b6e CODE       _lcd_pulse_e        
+    1c2e CODE       _lcd_writebyte      
+    18d4 CODE       _main               
+    2234 CODE       _memcpy             
+    2244 CODE       _memset             
+    1736 CODE       _modify_registers   
+    1b44 CODE       _port2_irq          
+    17ac CODE       _read_data          
+     200 IDATA0     _registers          
+     2fa IDATA0     _seconds            
+    1830 CODE       _send_data          
+    184c CODE       _showMenu           
+    2254 CODE       _sprintf            
+    2224 CODE       _strlen             
+     2f8 IDATA0     _ticks              
+    1938 CODE       _timerA_wakeup      
+    1916 CODE       _timer_init         
+    192e CODE       _timer_reset        
+    196c CODE       _timer_wait         
+    1b10 CODE       _uart0_rx           
+    1b2a CODE       _uart1_rx           
+    198e CODE       _uart_config_io     
+    1aba CODE       _uart_get_byte      
+    19e6 CODE       _uart_init          
+     2fc IDATA0     _uart_port          
+    1a94 CODE       _uart_put_byte      
+     300 IDATA0     _uart_rx_buffer     
+    1acc CODE       _uart_spi_byte      
+     2fe IDATA0     _uart_status        
+    1988 CODE       _uart_switch        
+
+
+SYMBOLS BY VALUE
+
+       0            ___begin_UDATA0     
+       0            ___end_UDATA0       
+     200            RAM_Start_Address   
+     200 IDATA0     ___begin_IDATA0     
+     200 IDATA0     _registers          
+     2f4 IDATA0     _cc2500_status_byte 
+     2f6 IDATA0     _hyperterm_echo     
+     2f8 IDATA0     _ticks              
+     2fa IDATA0     _seconds            
+     2fc IDATA0     _uart_port          
+     2fe IDATA0     _uart_status        
+     300 IDATA0     _uart_rx_buffer     
+     302 IDATA0     _keyboard_waiting   
+     800            RAM_Size            
+    1100 CODE       _cc2500_init        
+    1126 CODE       _cc2500_reset       
+    1176 CODE       _cc2500_setradioregisters
+    131e CODE       _cc2500_status      
+    1324 CODE       _cc2500_read_reg    
+    134c CODE       _cc2500_write_reg   
+    1376 CODE       _cc2500_reg_get_name
+    13b8 CODE       _cc2500_transmit_packet
+    1440 CODE       _hyperterm_init     
+    144c CODE       _hyperterm_putchar  
+    1460 CODE       _hyperterm_getchar  
+    1480 CODE       _hyperterm_printf   
+    1632 CODE       _keypad_pressed     
+    165e CODE       _keypad_timerA_wakeup
+    1674 CODE       _keypad_disable_interrupts
+    1676 CODE       _convInt            
+    1696 CODE       _getHex             
+    16dc CODE       _dump_registers     
+    1736 CODE       _modify_registers   
+    17ac CODE       _read_data          
+    1830 CODE       _send_data          
+    184c CODE       _showMenu           
+    18d4 CODE       _main               
+    1916 CODE       _timer_init         
+    192e CODE       _timer_reset        
+    1938 CODE       _timerA_wakeup      
+    196c CODE       _timer_wait         
+    1988 CODE       _uart_switch        
+    198e CODE       _uart_config_io     
+    19e6 CODE       _uart_init          
+    1a94 CODE       _uart_put_byte      
+    1aba CODE       _uart_get_byte      
+    1acc CODE       _uart_spi_byte      
+    1b10 CODE       _uart0_rx           
+    1b2a CODE       _uart1_rx           
+    1b44 CODE       _port2_irq          
+    1b6e CODE       _lcd_pulse_e        
+    1b88 CODE       _lcd_init           
+    1c2e CODE       _lcd_writebyte      
+    1d5a CODE       ___vfprintf         
+    21f0 CODE       ___int16_mul        
+    2204 CODE       ___uint16_div       
+    221c CODE       ___uint16_mod       
+    2224 CODE       _strlen             
+    2234 CODE       _memcpy             
+    2244 CODE       _memset             
+    2254 CODE       _sprintf            
+    26db CONST      ___hex_uc           
+    26eb CONST      ___hex_lc           

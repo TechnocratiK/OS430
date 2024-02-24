@@ -1,0 +1,9 @@
+Fitter Status : Successful - Sun Nov 28 21:39:58 2010
+Quartus II Version : 10.0 Build 218 06/27/2010 SJ Full Version
+Revision Name : McGumps
+Top-level Entity Name : McGumps
+Family : MAX7000AE
+Device : EPM7128AELC84-10
+Timing Models : Final
+Total macrocells : 29 / 128 ( 23 % )
+Total pins : 66 / 68 ( 97 % )

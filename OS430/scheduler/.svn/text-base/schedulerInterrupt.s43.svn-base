@@ -1,0 +1,106 @@
+#include <msp430x14x.h>
+#include "config.h"
+#include "scheduler/thread.h"
+
+  .code
+_schedulerInterrupt::
+  ; store r15 and r14 on the stack (temporarily)
+  push.w  r14
+  push.w  r15
+
+  ; update the counter
+  mov.w   TAR, r15
+  add.w   #SCHEDULER_QUANTUM_TIME, r15
+  mov.w   r15, TACCR0
+
+  ; update the thread's time
+  mov.w   _scheduler_queue, r15
+  add.w   THREAD_PRIORITY(r15), THREAD_TIME(r15)
+
+  ; decrease the thread's priority
+  cmp.w   #SCHEDULER_MINIMUM_PRIORITY, THREAD_PRIORITY(r15)
+  jc _schedulerInterrupt_no_priority_adjust
+    inc.w   THREAD_PRIORITY(r15)
+_schedulerInterrupt_no_priority_adjust:
+
+  ; update the maximum time if necessary
+  cmp.w   _scheduler_maximumTime, THREAD_TIME(r15)
+  jn _schedulerInterrupt_no_maximumTime_adjust
+    mov.w   THREAD_TIME(r15), _scheduler_maximumTime
+_schedulerInterrupt_no_maximumTime_adjust:
+
+  ; check if a switch left may occur
+  mov.w   #0x02, r14
+  cmp.w   _scheduler_queueSize, r14
+  jc _schedulerInterrupt_no_switch
+  
+  mov.w   (_scheduler_queue + 0x02), r14
+  cmp.w   THREAD_TIME(r15), THREAD_TIME(r14)
+  jn _schedulerInterrupt_switch
+  jz _schedulerInterrupt_switch
+
+  ; check if a switch right may occur
+  mov.w   #0x04, r14
+  cmp.w   _scheduler_queueSize, r14
+  jc _schedulerInterrupt_no_switch
+
+  mov.w   (_scheduler_queue + 0x04), r14
+  cmp.w   THREAD_TIME(r15), THREAD_TIME(r14)
+  jn _schedulerInterrupt_switch
+  jz _schedulerInterrupt_switch
+  
+_schedulerInterrupt_no_switch:
+  ; no switch is required; return
+  pop.w   r15
+  pop.w   r14
+  reti
+
+_schedulerInterrupt_switch:
+  ; store the current thread's state in its descriptor
+  mov.w   r4, (THREAD_REGISTERS + 0x00)(r15)
+  mov.w   r5, (THREAD_REGISTERS + 0x02)(r15)
+  mov.w   r6, (THREAD_REGISTERS + 0x04)(r15)
+  mov.w   r7, (THREAD_REGISTERS + 0x06)(r15)
+  mov.w   r8, (THREAD_REGISTERS + 0x08)(r15)
+  mov.w   r9, (THREAD_REGISTERS + 0x0a)(r15)
+  mov.w   r10, (THREAD_REGISTERS + 0x0c)(r15)
+  mov.w   r11, (THREAD_REGISTERS + 0x0e)(r15)
+  mov.w   r12, (THREAD_REGISTERS + 0x10)(r15)
+  mov.w   r13, (THREAD_REGISTERS + 0x12)(r15)
+
+  ; r15 and r14 are on the stack
+  pop.w   (THREAD_REGISTERS + 0x16)(r15)
+  pop.w   (THREAD_REGISTERS + 0x14)(r15)
+
+  ; store the current thread's stack pointer in its descriptor
+  mov.w   sp, THREAD_STACK_POINTER(r15)
+
+  ; remove the thread from the queue
+  push.w  r15
+  call #_schedulerQueuePop
+
+  ; reinsert the thread into the queue
+  pop.w   r14
+  call #_schedulerQueueInsert
+  
+  ; load the current thread's stack pointer from its descriptor
+  mov.w   _scheduler_queue, r15
+  mov.w   THREAD_STACK_POINTER(r15), sp
+
+  ; load the current thread's state from its descriptor
+  mov.w   (THREAD_REGISTERS + 0x00)(r15), r4
+  mov.w   (THREAD_REGISTERS + 0x02)(r15), r5
+  mov.w   (THREAD_REGISTERS + 0x04)(r15), r6
+  mov.w   (THREAD_REGISTERS + 0x06)(r15), r7
+  mov.w   (THREAD_REGISTERS + 0x08)(r15), r8
+  mov.w   (THREAD_REGISTERS + 0x0a)(r15), r9
+  mov.w   (THREAD_REGISTERS + 0x0c)(r15), r10
+  mov.w   (THREAD_REGISTERS + 0x0e)(r15), r11
+  mov.w   (THREAD_REGISTERS + 0x10)(r15), r12
+  mov.w   (THREAD_REGISTERS + 0x12)(r15), r13
+  mov.w   (THREAD_REGISTERS + 0x14)(r15), r14
+  mov.w   (THREAD_REGISTERS + 0x16)(r15), r15
+
+  ; return
+  reti
+

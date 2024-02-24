@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 27
+/svn/!svn/ver/48/OS430/chat
+END
+chat.h
+K 25
+svn:wc:ra_dav:version-url
+V 34
+/svn/!svn/ver/48/OS430/chat/chat.h
+END
+message.c
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/svn/!svn/ver/48/OS430/chat/message.c
+END
+message.h
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/svn/!svn/ver/48/OS430/chat/message.h
+END
+chat.c
+K 25
+svn:wc:ra_dav:version-url
+V 34
+/svn/!svn/ver/48/OS430/chat/chat.c
+END

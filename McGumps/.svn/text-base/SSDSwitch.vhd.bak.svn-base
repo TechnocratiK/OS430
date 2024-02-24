@@ -1,0 +1,24 @@
+--
+-- SSDSwitch.vhd
+--
+
+-- IEEE library for std_logic type
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity SSDSwitch is
+  port (
+    clk                           : in std_logic;
+	 reset                         : in std_logic;
+	 ssd_select                    : out std_logic);
+end SSDSwitch;
+
+architecture SSDMultiplexer of SSDMultiplexer is
+  ssd_left_enable <= ssd_select;
+  ssd_right_enable <= not ssd_select;
+  
+  with ssd_select select
+    ssd_nibble <=
+	   ssd_values(3 downto 0) when '0',
+		ssd_values(7 downto 4) when '1';
+end SSDMultiplexer;

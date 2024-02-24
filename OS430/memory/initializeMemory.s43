@@ -1,0 +1,19 @@
+#include "config.h"
+
+  .code
+_initializeMemory::
+  ; zero the memory map
+  mov.w   #MEMORY_MAP_START, r15
+_initializeMemory_loop:
+    ; test for the loop end
+    cmp.w   #MEMORY_MAP_END, r15
+  jc _initializeMemory_loop_end
+
+    ; clear the word and increment
+    clr.w   @r15
+    incd.w  r15
+  jmp _initializeMemory_loop
+_initializeMemory_loop_end:
+
+  ; return 
+  ret

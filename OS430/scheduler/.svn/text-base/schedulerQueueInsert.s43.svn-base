@@ -1,0 +1,28 @@
+#include "scheduler/thread.h"
+
+  .code
+_schedulerQueueInsert::
+  ; insert r14 at r15 and move it up appropriately (will overwrite 0(r15))
+_schedulerQueueInsert_insert_loop:
+    ; find the parent
+    mov.w   r15, r13
+    sub.w   #0x0002, r13
+    rra.w   r13
+    and.w   #0x7ffe, r13
+
+    ; check if the parent should be moved down
+    mov.w   _scheduler_queue(r13), r12
+    cmp.w   THREAD_TIME(r14), THREAD_TIME(r12)
+  jn _schedulerQueueInsert_insert_loop_end
+  jz _schedulerQueueInsert_insert_loop_end
+
+    ; move the parent down and loop
+    mov.w   _scheduler_queue(r13), _scheduler_queue(r15)
+    mov.w   r13, r15
+    tst.w   r15
+  jnz _schedulerQueueInsert_insert_loop
+_schedulerQueueInsert_insert_loop_end:
+
+  ; insert r14 at the appropriate place and return
+  mov.w   r14, _scheduler_queue(r15)
+  ret

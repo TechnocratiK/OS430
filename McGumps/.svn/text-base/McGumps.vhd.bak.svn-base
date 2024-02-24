@@ -1,0 +1,31 @@
+--
+-- McGumps.vhd
+--
+
+-- IEEE library for std_logic type
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity lab3 is
+  port (
+    msp430_port1                  : inout std_logic_vector[7 downto 0];
+    ste_uP                        : in std_logic;
+    simo_uP                       : in std_logic;
+    somi_uP                       : out std_logic;
+    uclk_uP                       : in std_logic;
+    ste_cc                        : out std_logic;
+    simo_cc                       : out std_logic;
+    somi_cc                       : in std_logic;
+    uclk_cc                       : out std_logic;
+	 clk_en                        : out std_logic);
+end lab3;
+
+
+architecture myLab3 of lab3 is
+begin
+  ste_cc <= ste_uP;
+  simo_cc <= simo_uP;
+  somi_uP <= somi_cc;
+  uclk_cc <= uclk_uP;
+  clk_en <= '1';
+end myLab3;

@@ -1,0 +1,72 @@
+#include <msp430x14x.h>
+#include "config.h"
+#include "scheduler/thread.h"
+
+  .code
+_stopThread::
+  ; disable interrupts
+  dint
+
+  ; store the current thread's descriptor in r11
+  mov.w   _scheduler_queue, r11
+
+  ; remove the current thread from the top of the queue
+  call #_schedulerQueuePop
+
+  ; check if the processor should be shut down
+  sub.w   #0x02, _scheduler_queueSize
+  jnz _stopThread_no_halt
+
+    ; halt the processor :(
+_stopThread_halt:
+    bis.w   CPUOFF, sr
+    jmp _stopThread_halt
+
+_stopThread_no_halt:
+  cmp.w   _scheduler_queueSize, r15
+  jz _stopThread_no_insert
+
+    ; insert the last element back into the queue
+    mov.w   _scheduler_queueSize, r14
+    mov.w   _scheduler_queue(r14), r14
+    call #_schedulerQueueInsert
+_stopThread_no_insert:
+
+  ; free the thread's stack
+  mov.w   THREAD_STACK_SIZE(r11), r14
+  mov.w   THREAD_STACK(r11), r15
+  call #_freeMemory
+
+  ; free the thread's descriptor
+  mov.w   r11, r15
+  mov.w   #THREAD_DESCRIPTOR_SIZE, r14
+  call #_freeMemory
+
+  ; update the timer
+  bic.w   #(MC1 | MC0), TACTL
+  mov.w   TAR, TACCR0
+  add.w   #SCHEDULER_QUANTUM_TIME, TACCR0
+  add.w   #53, TAR
+  bis.w   #(MC1), TACTL
+  
+  ; load the current thread's stack pointer from its descriptor
+  mov.w   _scheduler_queue, r15
+  mov.w   THREAD_STACK_POINTER(r15), sp
+
+  ; load the next thread's state from its descriptor
+  mov.w   _scheduler_queue, r15
+  mov.w   (THREAD_REGISTERS + 0x00)(r15), r4
+  mov.w   (THREAD_REGISTERS + 0x02)(r15), r5
+  mov.w   (THREAD_REGISTERS + 0x04)(r15), r6
+  mov.w   (THREAD_REGISTERS + 0x06)(r15), r7
+  mov.w   (THREAD_REGISTERS + 0x08)(r15), r8
+  mov.w   (THREAD_REGISTERS + 0x0a)(r15), r9
+  mov.w   (THREAD_REGISTERS + 0x0c)(r15), r10
+  mov.w   (THREAD_REGISTERS + 0x0e)(r15), r11
+  mov.w   (THREAD_REGISTERS + 0x10)(r15), r12
+  mov.w   (THREAD_REGISTERS + 0x12)(r15), r13
+  mov.w   (THREAD_REGISTERS + 0x14)(r15), r14
+  mov.w   (THREAD_REGISTERS + 0x16)(r15), r15
+
+  ; return
+  reti

@@ -1,0 +1,25 @@
+#include <msp430x14x.h>
+
+  .code
+_schedulerTime::
+  ; store interrupts on the stack
+  sub.w   #0x06, sp
+  mov.w   sp, r15
+  call #_storeAndDisableInterrupts
+
+  ; store the time on the stack
+  mov.w   (_scheduler_time + 0x02), 2(sp)
+  mov.w   (_scheduler_time + 0x00), 4(sp)
+
+  ; restore interrupts
+  mov.w   sp, r15
+  call #_restoreInterrupts
+  
+  ; return
+  add.w   #0x02, sp
+  pop.w   r15
+  pop.w   r14
+  ret
+
+
+

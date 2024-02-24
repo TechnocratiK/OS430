@@ -1,0 +1,54 @@
+--
+-- SSDDecoder.vhd
+--
+
+-- IEEE library for std_logic type
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity SSDDecoder is
+  port (
+    clk                           : in std_logic;
+	 reset                         : in std_logic;
+	 serial_in                     : in std_logic;
+	 serial_clk                    : in std_logic;
+	 data_out                      : out std_logic_vector(7 downto 0));
+	 data_valid                    : out std_logic;
+end SerialShiftRegister;
+
+architecture SerialShiftRegister of SerialShiftRegister is
+  signal serial_clk_old           : std_logic;
+  signal bits                     : integer range 0 to 1;
+  signal data                     : std_logic_vector(7 downto 0);
+  
+begin
+  data_out <= data;
+
+  process (clk, reset)
+  begin
+    if reset = '1' then
+	   bits <= 0;
+		serial_clk_old <= serial_clk;
+		data_valid <= '0';
+	 end if;
+	 
+	 if clk = '1' and clk'event and serial_clk = not serial_clk_old then
+	   serial_clk_old <= serial_clk;
+
+	   case state is
+		  when 0 =>
+		    data <= serial_in & "0000000";
+			 data_valid <= '0';
+			 bits <= 1;
+		  when 7 =>
+		    data <= serial_in & data(7 downto 1);
+			 data_valid <= '1';
+			 bits <= 0;
+		  when others =>
+		    data <= serial_in & data(7 downto 1);
+			 data_valid <= '0';
+			 bits <= bits + 1;
+		end case;
+	 end if;
+  end process;
+end SerialShiftRegister;

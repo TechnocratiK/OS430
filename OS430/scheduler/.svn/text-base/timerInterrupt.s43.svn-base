@@ -1,0 +1,29 @@
+#include <msp430x14x.h>
+  
+  .code
+_timerInterrupt::
+  ; determine the kind of interrupt that occurred
+  add.w   &TAIV, PC
+  reti                                  ; interrupt
+  jmp _timerInterrupt_scheduler_system_time
+  jmp _timerInterrupt_scheduler_pause_time
+  reti
+  reti
+
+  ; for TAIFG
+  reti
+
+_timerInterrupt_scheduler_pause_time:
+  ; restart the processor
+  bic.w   CPUOFF, SR
+  reti
+
+_timerInterrupt_scheduler_system_time:
+  ; update the system time
+  add.w   #0x01, (_scheduler_time + 0x00)
+  adc.w   (_scheduler_time + 0x02)
+
+  ; update the capture register
+  add.w   #0x3e8, TACCR1
+
+  reti

@@ -1,0 +1,16 @@
+/**
+ * LCD header file with signal defines
+ *
+ */
+
+#ifndef __INCLUDE_LCD_H
+#define __INCLUDE_LCD_H
+
+void lcd_init(void);
+void lcd_writebyte(char b);
+char lcd_read_status(void);
+void lcd_printString(char* string);
+
+
+#endif
+

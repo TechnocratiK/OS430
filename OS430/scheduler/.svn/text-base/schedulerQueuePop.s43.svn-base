@@ -1,0 +1,50 @@
+#include "scheduler/thread.h"
+  
+  .code
+_schedulerQueuePop::
+  ; store r11 on the stack
+  push.w  r11
+
+  ; remove the scheduler queue's top
+  clr.w   r15
+_schedulerQueuePop_remove_loop:
+    ; find the left child of the thread
+    mov.w   r15, r14
+    rla.w   r14
+    add.w   #0x0002, r14
+    cmp.w   _scheduler_queueSize, r14
+  jc _schedulerQueuePop_remove_loop_end
+
+    ; find the right child of the thread
+    mov.w   r15, r13
+    rla.w   r13
+    add.w   #0x0004, r13
+    cmp.w   _scheduler_queueSize, r13
+    jc _schedulerQueuePop_remove_loop_no_right
+
+      ; both children exist, move the one with the lowest time up
+      mov.w   _scheduler_queue(r14), r12
+      mov.w   _scheduler_queue(r13), r11
+      cmp.w   THREAD_TIME(r12), THREAD_TIME(r11)
+      jn _schedulerQueuePop_remove_loop_move_right
+
+        ; move the left child up
+        mov.w   _scheduler_queue(r14), _scheduler_queue(r15)
+        mov.w   r14, r15
+  jmp _schedulerQueuePop_remove_loop
+
+_schedulerQueuePop_remove_loop_move_right:
+        ; move the right child up
+        mov.w   _scheduler_queue(r13), _scheduler_queue(r15)
+        mov.w   r13, r15
+  jmp _schedulerQueuePop_remove_loop
+
+_schedulerQueuePop_remove_loop_no_right:
+      ; only the left child exists; move left and exit the loop
+      mov.w   _scheduler_queue(r14), _scheduler_queue(r15)
+      mov.w   r14, r15
+_schedulerQueuePop_remove_loop_end:
+
+  ; return
+  pop.w   r11
+  ret

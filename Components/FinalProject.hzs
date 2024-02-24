@@ -1,0 +1,58 @@
+<!DOCTYPE CrossStudio_for_MSP430_Session_File>
+<session>
+ <Breakpoints>
+  <BreakpointListItem actiontype="0" chainFrom="" line="197" length="0" triggertype="0" useHWbreakpoint="false" group="(Default)" breakdatatype="0" value="0" name="unnamed" counter="0" state="4" mask="0" comparison="0" expression="" filename="F:\dfgdf\FinalProject\main.c" />
+  <BreakpointListItem actiontype="0" chainFrom="" line="139" length="0" triggertype="0" useHWbreakpoint="false" group="Breakpoints" breakdatatype="0" value="0" name="unnamed" counter="0" state="4" mask="0" comparison="0" expression="" filename="C:\Users\Zeben\Documents\School\ECSE426 MicroP\project\game.c" />
+  <BreakpointListItem actiontype="0" chainFrom="" line="160" length="0" triggertype="0" useHWbreakpoint="false" group="Breakpoints" breakdatatype="0" value="0" name="unnamed" counter="0" state="4" mask="0" comparison="0" expression="" filename="C:\Users\Zeben\Documents\School\ECSE426 MicroP\project\game.c" />
+ </Breakpoints>
+ <ExecutionCountWindow/>
+ <Memory1>
+  <MemoryWindow autoEvaluate="0" addressText="0x09EA" numColumns="8" sizeText="8" dataSize="1" radix="16" addressSpace="" />
+ </Memory1>
+ <Memory2>
+  <MemoryWindow autoEvaluate="0" addressText="" numColumns="8" sizeText="" dataSize="1" radix="16" addressSpace="" />
+ </Memory2>
+ <Memory3>
+  <MemoryWindow autoEvaluate="0" addressText="" numColumns="8" sizeText="" dataSize="1" radix="16" addressSpace="" />
+ </Memory3>
+ <Memory4>
+  <MemoryWindow autoEvaluate="0" addressText="" numColumns="8" sizeText="" dataSize="1" radix="16" addressSpace="" />
+ </Memory4>
+ <Project>
+  <ProjectSessionItem path="FinalProject" name="unnamed" />
+  <ProjectSessionItem path="FinalProject;FinalProject" name="unnamed" />
+  <ProjectSessionItem path="FinalProject;FinalProject;Source Files" name="unnamed" />
+ </Project>
+ <Register1>
+  <RegisterWindow unsignedDisplays="" asciiDisplays="" octalDisplays="" visibleGroups="CPU Registers" decimalDisplays="" binaryDisplays="" />
+ </Register1>
+ <Register2>
+  <RegisterWindow unsignedDisplays="" asciiDisplays="" octalDisplays="" visibleGroups="" decimalDisplays="" binaryDisplays="" />
+ </Register2>
+ <Register3>
+  <RegisterWindow unsignedDisplays="" asciiDisplays="" octalDisplays="" visibleGroups="" decimalDisplays="" binaryDisplays="" />
+ </Register3>
+ <Register4>
+  <RegisterWindow unsignedDisplays="" asciiDisplays="" octalDisplays="" visibleGroups="" decimalDisplays="" binaryDisplays="" />
+ </Register4>
+ <SourceNavigatorWindow/>
+ <TraceWindow>
+  <Trace wrap="Yes" type="1" enabled="Yes" />
+ </TraceWindow>
+ <Watch1>
+  <Watches active="1" />
+ </Watch1>
+ <Watch2>
+  <Watches active="0" />
+ </Watch2>
+ <Watch3>
+  <Watches active="0" />
+ </Watch3>
+ <Watch4>
+  <Watches active="0" />
+ </Watch4>
+ <Files>
+  <SessionOpenFile useTextEdit="1" useBinaryEdit="0" x="15" debugPath="\\campus.mcgill.ca\EMF\ELE\oadese\Desktop\MicroP Project\OS430\tempc.c" y="31" useHTMLEdit="0" path="\\campus.mcgill.ca\EMF\ELE\oadese\Desktop\MicroP Project\OS430\tempc.c" left="0" selected="0" name="unnamed" top="0" />
+ </Files>
+ <MSP430CrossStudioWindow activeProject="FinalProject" ignoreExceptions="" autoConnectTarget="" debugSearchFileMap="" fileDialogInitialDirectory="\\campus.mcgill.ca\EMF\ELE\oadese\Desktop\MicroP Project\OS430" fileDialogDefaultFilter="*.c;*.h" debugSearchPath="" buildConfiguration="Debug" />
+</session>

@@ -1,0 +1,14 @@
+#include <msp430x14x.h>
+
+  .code
+_restoreInterrupts::
+  ; restore the interrupts flag from the specified address
+  bit.w   #GIE, @r15
+  jz _restoreInterrupts_end
+
+    ; enable interrupts
+    eint
+_restoreInterrupts_end:
+
+  ; return
+  ret

@@ -1,0 +1,199 @@
+
+#include "common.h"
+#include "keypad.h"
+#include "timer.h"
+#include "cc2500.h"
+#include "hyperterm.h"
+#include "keyboard.h"
+#include "lcd.h"
+#include "game.h"
+#include "wifiProtocol.h"
+
+int i = 0;
+
+
+int convInt(char ascii) {
+  if(ascii >= '0' && ascii <= '9') return ascii-'0';
+  else return ascii-'A'+0xA;
+  
+}
+int getHex(void) {
+  char c;
+  int val = 0;
+  c = hyperterm_getchar();
+  if(c == 0x1B) return -1;
+  val += convInt(c) << 4;
+  c = hyperterm_getchar();
+  if(c == 0x1B) return -1;
+  val += convInt(c);
+
+  return val;
+}
+
+
+/**
+ * Loop over all registers and print address, name and current value
+ */
+void dump_registers(void) {
+  int i;
+  char data;
+  char* name = NULL;
+  
+  hyperterm_printf("\r\n");
+
+  for(i = 0; i < 0xFF; i++) {
+    name = cc2500_reg_get_name(i);
+    if(name != NULL){
+      data = cc2500_read_reg(i);
+      
+      hyperterm_printf("0x%2X : %s = 0x%2X\r\n", i, name, data);
+    }
+  }
+  
+  data = cc2500_status();
+  hyperterm_printf("\r\nStatus: 0x%2X\r\n", data);
+}
+
+
+/**
+ * Request register address, display current value, and request new value
+ */
+void modify_registers(void) {
+  int addr;
+  int val;
+  char* name;
+
+  hyperterm_printf("What register would you like to modify?\r\n: 0x");
+  addr = getHex();
+  if(addr == -1){
+    hyperterm_printf("\r\n");
+    return;
+  }
+  name = cc2500_reg_get_name(addr);
+
+  if(name == NULL) {
+    hyperterm_printf("\r\nInvalid Register Address\r\n");
+  }
+  else {
+
+    val = cc2500_read_reg(addr);
+
+    hyperterm_printf("Register Modification for %s(0x%2X):\r\nValue = 0x%2X changed to => 0x", name, addr, val);
+    
+    val = getHex();
+    if(val == -1){
+      hyperterm_printf("\r\n");
+      return;
+    }
+    cc2500_write_reg(addr, val);
+    
+  }
+}
+
+
+/**
+ * Read data from the RXBUF of the CC2500 and dump to terminal
+ */
+void read_data(void) {
+  char val;
+  int i, regAddr;
+  int size = 0;
+
+  uart_switch(CC2500_UART);
+  uart_spi_byte(CC2500REG_SRX, SPI_SINGLE_TRANS); //Put in receive mode
+  i = cc2500_read_reg(0xF8);
+  regAddr = i & 0x01;
+  while(regAddr == 0) {
+    i = cc2500_read_reg(0xF8);
+    regAddr = i & 0x01;
+  }
+  hyperterm_printf("Receiving...\n");
+  for(i = 0; i < 15; i++) {
+    val = cc2500_read_reg(CC2500REG_DATABUF);
+    hyperterm_printf("0x%2X -> %c\r\n", cc2500_status(), val);
+  }
+  hyperterm_printf("\r\n");
+}
+
+/**
+ * Transmit data then proceed as above
+ */
+void send_data(void) {
+  char* data = "i hate fucking microp", val;
+  int i;
+  cc2500_transmit_packet(data, 12);
+  uart_switch(CC2500_UART);
+}
+
+#define STATE_MAINMENU_RESET '1'
+#define STATE_MAINMENU_DUMP_REGS '2'
+#define STATE_MAINMENU_MODIFY '3'
+#define STATE_MAINMENU_READ_DATA '4'
+#define STATE_MAINMENU_ECHO '5'
+#define STATE_MAINMENU_EXIT '6'
+
+
+/**
+ * Main menu state machine
+ */
+void showMenu(void) {
+  int state = FALSE;
+  do {
+    hyperterm_printf("\r\nChoose an Option:\r\n");
+    hyperterm_printf("1) Reset\r\n");
+    hyperterm_printf("2) Dump all Registers\r\n");
+    hyperterm_printf("3) Modify Register\r\n");
+    hyperterm_printf("4) Read Data\r\n");
+    hyperterm_printf("5) Send Data\r\n");
+    hyperterm_printf("6) Chat Application\r\n");
+    state = hyperterm_getchar();
+    switch (state) {
+      case STATE_MAINMENU_RESET:
+        cc2500_reset();
+        break;
+      case STATE_MAINMENU_DUMP_REGS:
+        dump_registers();
+        break;
+      case STATE_MAINMENU_MODIFY:
+        modify_registers();
+        break;
+      case STATE_MAINMENU_READ_DATA:
+        read_data();
+        break;
+      case STATE_MAINMENU_ECHO:
+        send_data();
+        lcd_init();
+        break;
+    }
+  } while(state != STATE_MAINMENU_EXIT);
+}
+
+
+void main(void) {
+  char status;
+  // Stop watchdog.
+  WDTCTL = WDTPW + WDTHOLD;
+  _EINT();
+  // Turning 8MHZ Oscillator ON
+  BCSCTL1 &= ~XT2OFF;
+  // Route XT2 into SMCLK and MCLK
+  BCSCTL2 |= SELM1|SELS;
+  //BCSCTL2 |= DIVM_3; //Divide 8MHZ by 4 = 2  MHz
+  // ACLK (32.768KHz), clear TAR
+  TACTL = TASSEL_1 + TACLR + MC1;
+  timer_init();
+  hyperterm_init();
+  cc2500_init();
+//  keyboard_init();
+  //lcd_init();
+  P1DIR |= 0x01;
+  P1OUT ^= 0x01;
+  lcd_clearscreen();
+  lcd_printf("LCD test");
+  lcd_goto(LCD_LINE2);
+  lcd_printf("2nd Line");
+  showMenu();
+  while(TRUE);
+}
+
+

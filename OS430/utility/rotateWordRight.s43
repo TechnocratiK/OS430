@@ -1,0 +1,25 @@
+  PUBLIC _rotateWordRight
+  RSEG CODE
+
+_rotateWordRight:
+  ; prepare to loop
+  and.b   #0x0f, r14
+
+  ; loop, rotating the byte
+_rotateWordRight_loop:
+    ; test for the loop's end
+    tst.b   r14
+  jz _rotateWordRight_loop_end
+  
+    ; rotate the word
+    bit.b   #0x01, r15
+    rrc.b   r15
+
+    ; decrement the loop counter and loop
+    dec.b   r14
+  jmp _rotateWordRight_loop
+_rotateWordRight_loop_end:
+
+  ; return
+  ret
+  

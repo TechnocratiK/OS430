@@ -1,0 +1,6 @@
+For Compare (CMP)
+-----------------
+C -> Set when src <= dst
+N -> Set when (dst - src) < 0 (i.e. dst < src in circular math)
+Z -> Set when dst = src
+V -> Set when (dst - src) results in overflow

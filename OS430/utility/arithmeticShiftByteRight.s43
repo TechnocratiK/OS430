@@ -1,0 +1,29 @@
+  PUBLIC _arithmeticShiftByteRight
+  RSEG CODE
+
+_arithmeticShiftByteRight:
+  ; check for the bounds of r14
+  cmp.w   #0x0008, r14
+  jnc _arithmeticShiftByteRight_loop
+    ; r14 is out of range, return its top bit, repeated
+    rla.b   r15
+    mov.b   #0xff, r15
+    adc.b   r15
+    inv.b   r15
+  ret
+
+_arithmeticShiftByteRight_loop:
+    ; test for the loop's end
+    tst.b   r14
+  jz _arithmeticShiftByteRight_loop_end
+
+    ; shift the byte
+    rra.b   r15
+
+    ; decrement the loop counter and loop
+    dec.b   r14
+  jmp _arithmeticShiftByteRight_loop
+_arithmeticShiftByteRight_loop_end:
+
+  ; return
+  ret

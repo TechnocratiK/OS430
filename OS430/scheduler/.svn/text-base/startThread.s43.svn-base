@@ -1,0 +1,96 @@
+#include "config.h"
+#include "scheduler/thread.h"
+
+  .code
+; int startThread(void (*thread)(void), unsigned int stackSize)
+_startThread::
+  ; store the arguments on the stack, as well as a copy of GIE
+  push.w  r14
+  push.w  r15
+  sub.w   #0x02, sp
+
+  ; disable interrupts
+  mov.w   sp, r15
+  call #_storeAndDisableInterrupts
+
+  ; check that another thread can be added
+  mov.w  #(SCHEDULER_QUEUE_SIZE * 2 - 2), r13
+  cmp.w  _scheduler_queueSize, r13
+  jnc _startThread_fail
+
+  ; allocate memory for the thread descriptor
+  mov.w   #THREAD_DESCRIPTOR_SIZE, r15
+  call #_allocateMemory
+
+  ; confirm that the memory allocation succeeded
+  tst.w   r15
+  jz _startThread_fail
+
+  ; store the thread stack size in the descriptor
+  mov.w   4(sp), r14
+  mov.w   r14, THREAD_STACK_SIZE(r15)
+  mov.w   r15, 4(sp)
+
+  ; allocate memory for the thread stack (rounding the size up to the nearest word)
+  mov.w   r14, r15
+  inc.w   r15
+  and.w   #0xfffe, r15
+  call #_allocateMemory
+
+  ; confirm that the memory allocation succeeded
+  tst.w   r15
+  jnz _startThread_stack_allocated
+
+    ; allocating the stack failed, free the descriptor and return
+    mov.w   4(sp), r15
+    mov.w   #THREAD_DESCRIPTOR_SIZE, r14
+    call #_freeMemory
+  jmp _startThread_fail
+_startThread_stack_allocated:
+
+  ; initialize the descriptor
+  mov.w   4(sp), r14
+  mov.w   _scheduler_nextID, THREAD_ID(r14)                 ; thread id
+  inc.w   _scheduler_nextID
+  mov.w   r15, THREAD_STACK(r14)                            ; stack base
+  add.w   THREAD_STACK_SIZE(r14), r15                       ; stack pointer
+  sub.w   #0x0004, r15
+  mov.w   r15, THREAD_STACK_POINTER(r14)
+  mov.w   sr, r13                                           ; status register
+  bic.w   #0x0017, r13
+  bis.w   #0x0008, r13
+  mov.w   r13, 0(r15)
+  mov.w   2(sp), 2(r15)                                     ; program counter
+  mov.w   #SCHEDULER_MAXIMUM_PRIORITY, THREAD_PRIORITY(r14) ; thread priority
+  mov.w   _scheduler_queue, r15                             ; thread time
+  mov.w   THREAD_TIME(r15), THREAD_TIME(r14)
+
+  ; add the thread to the queue
+  mov.w   _scheduler_queueSize, r15
+  push.w  r14
+  call #_schedulerQueueInsert
+  pop.w   r14
+  incd.w  _scheduler_queueSize
+  
+  ; return the thread id
+  mov.w   THREAD_ID(r14), 4(sp)
+
+_startThread_end:
+  ; restore interrupts
+  mov.w   sp, r15
+  call #_restoreInterrupts
+
+  ; return
+  add.w   #0x04, sp
+  pop.w   r15
+  ret
+
+_startThread_fail:
+  ; restore interrupts
+  mov.w   sp, r15
+  call #_restoreInterrupts
+
+  ; return
+  add.w   #0x06, sp
+  clr.w   r15
+  ret

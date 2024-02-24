@@ -1,0 +1,12 @@
+#include <msp430x14x.h>
+
+  .code
+_storeAndDisableInterrupts::
+  ; store the status register at the specified address
+  mov.w   sr, @r15
+
+  ; disable interrupts
+  dint
+
+  ; return
+  ret

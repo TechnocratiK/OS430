@@ -1,0 +1,24 @@
+--
+-- McGumps.vhd
+--
+
+-- IEEE library for std_logic type
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity SerialShiftRegister is
+  port (
+    clk                           : in std_logic;
+	 reset                         : in std_logic;
+	 serial_in                     : in std_logic;
+	 data_out                      : out std_logic_vector(7 downto 0));
+end SerialShiftRegister;
+
+architecture SerialShiftRegister of SerialShiftRegister is
+begin
+  clockEnable <= '1';
+  ssdLeftEnable <= '1';
+  ssdRightEnable <= '0';
+  ssdTop <= '0';
+  ssdTopRight <= '1';
+end McGumps;

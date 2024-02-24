@@ -1,0 +1,30 @@
+#include <msp430x14x.h>
+#include "config.h"
+#include "scheduler/thread.h"
+
+  .code
+_yieldThread::
+  ; store the status register on the stack and disable interrupts
+  push.w  sr
+  dint
+
+  ; set the thread time to the maximum and subtract the priority
+  mov.w   _scheduler_queue, r15
+  mov.w   _scheduler_maximumTime, THREAD_TIME(r15)
+  sub.w   THREAD_PRIORITY(r15), THREAD_TIME(r15)
+
+  ; determine if the thread is at the highest priority already
+  cmp.w   #SCHEDULER_MAXIMUM_PRIORITY, THREAD_PRIORITY(r15)
+  jz _yieldThread_capped
+
+    ; the priority is not capped
+    add.w   #0x0003, THREAD_TIME(r15)
+    sub.w   #0x0002, THREAD_PRIORITY(r15)
+  jmp _schedulerInterrupt
+
+_yieldThread_capped:
+
+    ; the priority is capped
+    add.w   #0x0002, THREAD_TIME(r15)
+    sub.w   #0x0001, THREAD_PRIORITY(r15)
+  jmp _schedulerInterrupt

@@ -1,0 +1,77 @@
+#include <msp430x14x.h>
+#include "config.h"
+#include "scheduler/thread.h"
+
+; NOTE: There is NO ERROR CHECKING here
+  .code
+_initializeScheduler::
+  ; allocate memory for a new thread descriptor
+  mov.w   #THREAD_DESCRIPTOR_SIZE, r15
+  call #_allocateMemory
+
+  ; point the current thread pointer to the new thread
+  mov.w   r15, _scheduler_queue
+
+  ; allocate memory for the thread's stack
+  mov.w   #SCHEDULER_INIT_STACK_SIZE, r15
+  call #_allocateMemory
+
+  ; setup the thread descriptor
+  mov.w   _scheduler_queue, r14
+  mov.w   #0x0001, THREAD_ID(r14)
+  mov.w   r15, THREAD_STACK(r14)
+  mov.w   #SCHEDULER_INIT_STACK_SIZE, THREAD_STACK_SIZE(r14)
+  add.w   #(SCHEDULER_INIT_STACK_SIZE - 0x02), r15
+  mov.w   0(sp), 0(r15)
+  mov.w   r15, THREAD_STACK_POINTER(r14)
+  mov.w   #SCHEDULER_MAXIMUM_PRIORITY, THREAD_PRIORITY(r14)
+  mov.w   #0x0000, THREAD_TIME(r14)
+
+  ; setup the scheduler
+  mov.w   #0x0002, _scheduler_queueSize
+  mov.w   #0x0002, _scheduler_nextID
+  clr.w   _scheduler_maximumTime
+
+  ; setup the timer
+  clr.w   (_scheduler_time + 0x00)
+  clr.w   (_scheduler_time + 0x02)
+
+  ; switch stacks
+  mov.w   r15, sp
+
+  ;
+  ; Setup the XT2 oscillator as the source for SMCLK
+  ;
+  bic.b  #(XT2OFF), BCSCTL1
+  bis.b  #(SELS), BCSCTL2
+  bic.b  #(DIVS1 | DIVS0), BCSCTL2
+
+  ;
+  ; Setup TimerA for use as the scheduling timer
+  ;
+
+  ; stop the timer
+  bic.w   #(MC1 | MC0), TACTL
+
+  ; setup the timer
+  bic.w   #(TASSEL0 | TAIE | TAIFG), TACTL
+  bis.w   #(TASSEL1 | ID1 | ID0 | TACLR), TACTL
+
+  ; setup the capture/compare module for the scheduler
+  bic.w   #(CM1 | CM0 | CCIS1 | CCIS0 | CAP | OUTMOD2 | OUTMOD1 | OUTMOD0 | COV | CCIFG), TACCTL0
+  bis.w   #CCIE, TACCTL0
+
+  ; setup the capture/compare moduler for the timer
+  bic.w   #(CM1 | CM0 | CCIS1 | CCIS0 | CAP | OUTMOD2 | OUTMOD1 | OUTMOD0 | COV | CCIFG), TACCTL1
+  bis.w   #CCIE, TACCTL1
+
+  ; initialize the compare modules with a value
+  mov.w   #SCHEDULER_QUANTUM_TIME, TACCR0
+  mov.w   #0x03e8, TACCR1
+
+  ; start the timer in continuous mode
+  bis.w   #MC1, TACTL
+
+  ; enable interrupts and return
+  eint
+  ret

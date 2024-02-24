@@ -1,0 +1,55 @@
+<!DOCTYPE CrossStudio_Project_File>
+<solution version="1" Name="FinalProject" >
+  <project Name="FinalProject" >
+    <configuration Target="MSP430F149" linker_memory_map_file="$(StudioDir)/targets/MSP430F149.xml" project_directory="" project_type="Executable" Name="Common" build_use_hardware_multiplier="Yes" />
+    <folder Name="Source Files" >
+      <configuration filter="c;h;s;asm;inc;s43" Name="Common" />
+      <file file_name="cc2500.c" Name="cc2500.c" >
+        <configuration build_exclude_from_build="No" Name="Debug" />
+      </file>
+      <file file_name="cc2500.h" Name="cc2500.h" />
+      <file file_name="cc2500_registers.h" Name="cc2500_registers.h" />
+      <file file_name="common.h" Name="common.h" />
+      <file file_name="hyperterm.c" Name="hyperterm.c" />
+      <file file_name="hyperterm.h" Name="hyperterm.h" />
+      <file file_name="keypad.c" Name="keypad.c" >
+        <configuration build_exclude_from_build="No" Name="Debug" />
+      </file>
+      <file file_name="keypad.h" Name="keypad.h" />
+      <file file_name="main.c" Name="main.c" >
+        <configuration build_exclude_from_build="No" Name="Debug" />
+      </file>
+      <file file_name="timer.c" Name="timer.c" >
+        <configuration build_exclude_from_build="No" Name="Debug" />
+      </file>
+      <file file_name="timer.h" Name="timer.h" />
+      <file file_name="uart.c" Name="uart.c" >
+        <configuration build_exclude_from_build="No" Name="Debug" />
+      </file>
+      <file file_name="uart.h" Name="uart.h" />
+      <file file_name="keyboard.h" Name="keyboard.h" />
+      <file file_name="keyboard.c" Name="keyboard.c" />
+      <file file_name="lcd.h" Name="lcd.h" />
+      <file file_name="lcd.c" Name="lcd.c" >
+        <configuration build_exclude_from_build="No" Name="Debug" />
+      </file>
+      <file file_name="keyboard_mainc.c" Name="keyboard_mainc.c" >
+        <configuration build_exclude_from_build="Yes" Name="Debug" />
+      </file>
+      <file file_name="game.c" Name="game.c" />
+      <file file_name="game.h" Name="game.h" />
+      <file file_name="wifiProtocol.c" Name="wifiProtocol.c" />
+      <file file_name="wifiProtocol.h" Name="wifiProtocol.h" />
+      <file file_name="gui.h" Name="gui.h" />
+    </folder>
+    <folder Name="System Files" >
+      <configuration filter="xml" Name="Common" />
+      <file file_name="$(StudioDir)/src/crt0.asm" Name="crt0.asm" />
+      <file file_name="$(StudioDir)/targets/section_placement.xml" Name="section_placement.xml" >
+        <configuration Name="Common" file_type="Section Placement" />
+      </file>
+    </folder>
+  </project>
+  <configuration build_debug_information="Yes" Name="Debug" />
+  <configuration optimize_jump_chaining="Yes" optimize_block_locality="Yes" optimize_tail_merging="Yes" c_preprocessor_definitions="NDEBUG" optimize_cross_calling="Standard" build_debug_information="No" optimize_jump_threading="Yes" Name="Release" optimize_dead_code="Yes" optimize_cross_jumping="Yes" optimize_copy_propagation="Yes" />
+</solution>

@@ -1,0 +1,25 @@
+  PUBLIC _rotateByteLeft
+  RSEG CODE
+
+_rotateByteLeft:
+  ; prepare to loop
+  and.b   #0x07, r14
+
+  ; loop, rotating the byte
+_rotateByteLeft_loop:
+    ; test for the loop's end
+    tst.b   r14
+  jz _rotateByteLeft_loop_end
+  
+    ; rotate the byte
+    rla.b   r15
+    adc.b   r15
+
+    ; decrement the loop counter and loop
+    dec.b   r14
+  jmp _rotateByteLeft_loop
+_rotateByteLeft_loop_end:
+
+  ; return
+  ret
+  

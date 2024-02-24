@@ -1,0 +1,85 @@
+# -------------------------------------------------------------------------- #
+#
+# Copyright (C) 1991-2010 Altera Corporation
+# Your use of Altera Corporation's design tools, logic functions 
+# and other software and tools, and its AMPP partner logic 
+# functions, and any output files from any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Altera Program License 
+# Subscription Agreement, Altera MegaCore Function License 
+# Agreement, or other applicable license agreement, including, 
+# without limitation, that your use is for the sole purpose of 
+# programming logic devices manufactured by Altera and sold by 
+# Altera or its authorized distributors.  Please refer to the 
+# applicable agreement for further details.
+#
+# -------------------------------------------------------------------------- #
+#
+# Quartus II
+# Version 10.0 Build 218 06/27/2010 SJ Full Version
+# Date created = 17:28:06  November 27, 2010
+#
+# -------------------------------------------------------------------------- #
+#
+# Notes:
+#
+# 1) The default values for assignments are stored in the file:
+#		microproject_assignment_defaults.qdf
+#    If this file doesn't exist, see file:
+#		assignment_defaults.qdf
+#
+# 2) Altera recommends that you do not modify this file. This
+#    file is updated automatically by the Quartus II software
+#    and any changes you make may be lost or overwritten.
+#
+# -------------------------------------------------------------------------- #
+
+
+set_global_assignment -name FAMILY MAX7000AE
+set_global_assignment -name DEVICE "EPM7128AELC84-10"
+set_global_assignment -name TOP_LEVEL_ENTITY microproject
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION 10.0
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "17:28:06  NOVEMBER 27, 2010"
+set_global_assignment -name LAST_QUARTUS_VERSION 10.0
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+set_global_assignment -name VHDL_FILE microproject.vhd
+set_global_assignment -name MAX7000_DEVICE_IO_STANDARD "3.3-V LVTTL"
+set_location_assignment PIN_15 -to CLK_out
+set_location_assignment PIN_28 -to CLK
+set_location_assignment PIN_25 -to MOSI
+set_location_assignment PIN_21 -to MOSI_out
+set_location_assignment PIN_18 -to SOMI
+set_location_assignment PIN_27 -to SOMI_out
+set_location_assignment PIN_16 -to STE_out
+set_location_assignment PIN_24 -to STE
+set_global_assignment -name MISC_FILE "C:/microprocessorproject/microproject.dpf"
+set_global_assignment -name MISC_FILE \\\\campus.mcgill.ca\\EMF\\ELE\\oadese\\Desktop\\microprocessorproject\\microproject.dpf
+set_location_assignment PIN_83 -to clock
+set_location_assignment PIN_70 -to LED[0]
+set_location_assignment PIN_69 -to LED[1]
+set_location_assignment PIN_68 -to LED[2]
+set_location_assignment PIN_67 -to LED[3]
+set_location_assignment PIN_65 -to LED[4]
+set_location_assignment PIN_64 -to LED[5]
+set_location_assignment PIN_63 -to LED[6]
+set_location_assignment PIN_60 -to chooseLED
+set_location_assignment PIN_4 -to reset
+set_location_assignment PIN_5 -to userVal
+set_location_assignment PIN_62 -to TCK
+set_location_assignment PIN_14 -to TDI
+set_location_assignment PIN_71 -to TDO
+set_location_assignment PIN_23 -to TMS
+set_location_assignment PIN_61 -to chooseLED2
+set_location_assignment PIN_73 -to clock_en
+set_location_assignment PIN_44 -to userVal[7]
+set_location_assignment PIN_45 -to userVal[6]
+set_location_assignment PIN_46 -to userVal[5]
+set_location_assignment PIN_48 -to userVal[4]
+set_location_assignment PIN_50 -to userVal[2]
+set_location_assignment PIN_49 -to userVal[3]
+set_location_assignment PIN_51 -to userVal[1]
+set_location_assignment PIN_52 -to userVal[0]
+set_location_assignment PIN_58 -to dec_pt
+set_global_assignment -name MISC_FILE "H:/SVN/ECSE 426/VHDL/microproject.dpf"
